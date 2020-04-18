@@ -42,10 +42,15 @@ public class ActionManager : SingletonSaved<ActionManager>
         {
             if(Time.realtimeSinceStartup > startActionTime + currentTimerDuration)
             {
-                Debug.Log("Game Over");
-                currentState = ActionState.GAME_OVER;
+                GameOver();
             }
         }
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("Game Over");
+        currentState = ActionState.GAME_OVER;
     }
 
     private void CalculateTimerDuration()
@@ -55,7 +60,7 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     private Action CreateRandomAction()
     {
-        ActionType type = (ActionType)UnityEngine.Random.Range(0, 3);
+        ActionType type = ActionType.PRESS_KEY; //(ActionType)UnityEngine.Random.Range(0, 3);
         string target = "";
         if(type == ActionType.PRESS_KEY)
         {
@@ -63,6 +68,22 @@ public class ActionManager : SingletonSaved<ActionManager>
             target = ascii.ToString();
         }
         return new Action(type, target);
+    }
+
+    public void DoAction(Action action)
+    {
+        if(currentState == ActionState.IN_PROGRESS)
+        {
+            if(currentAction.IsValid(action))
+            {
+                Debug.Log("Well done");
+                currentState = ActionState.DONE;
+            }
+            else
+            {
+                GameOver();
+            }
+        }
     }
 
     public bool IsGameOver()

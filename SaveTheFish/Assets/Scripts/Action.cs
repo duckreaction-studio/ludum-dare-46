@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 public enum ActionType { CLICK, HOLD, PRESS_KEY, MUTE, QUIT }
 public class Action
 {
@@ -28,5 +30,10 @@ public class Action
     public override string ToString()
     {
         return type.ToString() + " " + target;
+    }
+
+    public static Action PressKey(string key)
+    {
+        return new Action(ActionType.PRESS_KEY, key);
     }
 }
