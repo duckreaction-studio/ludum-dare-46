@@ -2,7 +2,12 @@
 using System;
 using UnityEngine;
 
-public enum ActionState { INIT, IN_PROGRESS, DONE, GAME_OVER }
+#if UNITY_EDITOR
+using UnityEditor;
+using System.Reflection;
+#endif
+
+public enum ActionState { INIT, IN_PROGRESS, PAUSE_ACTION, DONE, GAME_OVER }
 public class ActionManager : SingletonSaved<ActionManager>
 {
     [SerializeField]
@@ -11,21 +16,15 @@ public class ActionManager : SingletonSaved<ActionManager>
     protected float decreaseTimer = 0.9f;
     [SerializeField]
     protected float minTimer = 0.8f;
+    [SerializeField]
+    public float holdMinTime { get; protected set; } = 0.3f;
 
     protected ActionState currentState;
     protected int actionCount;
-    protected float currentTimerDuration;
-    protected float startActionTime;
 
     protected Action currentAction;
 
-    public float remaingTime
-    {
-        get
-        {
-            return Mathf.Max(startActionTime + currentTimerDuration - Time.realtimeSinceStartup, 0);
-        }
-    }
+    public float remainingTime { get; private set; } = 0;
 
     public void Update()
     {
@@ -33,36 +32,77 @@ public class ActionManager : SingletonSaved<ActionManager>
         {
             currentState = ActionState.IN_PROGRESS;
             currentAction = CreateRandomAction();
-            startActionTime = Time.realtimeSinceStartup;
-            CalculateTimerDuration();
+            remainingTime = CalculateTimerDuration();
+            Utils.ClearLogs();
             Debug.Log("Start");
             Debug.Log(currentAction);
         }
         else if(currentState == ActionState.IN_PROGRESS)
         {
-            if(Time.realtimeSinceStartup > startActionTime + currentTimerDuration)
+            remainingTime -= Time.deltaTime;
+            remainingTime = Mathf.Max(remainingTime, 0);
+            if(remainingTime == 0)
             {
-                Debug.Log("Game Over");
-                currentState = ActionState.GAME_OVER;
+                if (currentAction.doIt)
+                    GameOver();
+                else
+                    currentState = ActionState.DONE;
             }
         }
     }
 
-    private void CalculateTimerDuration()
+    private void GameOver()
     {
-        currentTimerDuration = (actionTimer - minTimer) * Mathf.Pow(decreaseTimer, actionCount) + minTimer;
+        Debug.Log("Game Over");
+        currentState = ActionState.GAME_OVER;
+    }
+
+    private float CalculateTimerDuration()
+    {
+        return (actionTimer - minTimer) * Mathf.Pow(decreaseTimer, actionCount) + minTimer;
+    }
+
+    public void StartPauseTimer()
+    {
+        if(currentState == ActionState.IN_PROGRESS)
+            currentState = ActionState.PAUSE_ACTION;
+    }
+
+    public void StopPauseTimer()
+    {
+        currentState = ActionState.IN_PROGRESS;
     }
 
     private Action CreateRandomAction()
     {
-        ActionType type = (ActionType)UnityEngine.Random.Range(0, 3);
+        ActionType type = (ActionType)UnityEngine.Random.Range(0, 5);
         string target = "";
         if(type == ActionType.PRESS_KEY)
         {
             char ascii = (char)UnityEngine.Random.Range(65, 91);
             target = ascii.ToString();
+        }else if(type == ActionType.CLICK)
+        {
+            target = RandomFishTarget();
         }
-        return new Action(type, target);
+        bool doIt = UnityEngine.Random.Range(0f, 1f) > 0.5f;
+        return new Action(doIt, type, target);
+    }
+
+    public void DoAction(Action action)
+    {
+        if(currentState == ActionState.IN_PROGRESS)
+        {
+            if(currentAction.IsValid(action))
+            {
+                Debug.Log("Well done");
+                currentState = ActionState.DONE;
+            }
+            else
+            {
+                GameOver();
+            }
+        }
     }
 
     public bool IsGameOver()
@@ -74,6 +114,22 @@ public class ActionManager : SingletonSaved<ActionManager>
     {
         actionCount = 0;
         currentState = ActionState.INIT;
+    }
+
+    public string RandomFishTarget()
+    {
+        int rand = UnityEngine.Random.Range(0, 4);
+        switch(rand)
+        {
+            case 1:
+                return "head";
+            case 2:
+                return "body";
+            case 3:
+                return "tail";
+            default:
+                return null;
+        }
     }
 
 }

@@ -18,7 +18,7 @@ namespace UI
 
         void Update()
         {
-            textUi.text = FormatTime(ActionManager.Instance.remaingTime);
+            textUi.text = FormatTime(ActionManager.Instance.remainingTime);
         }
 
         private string FormatTime(float remaingTime)
