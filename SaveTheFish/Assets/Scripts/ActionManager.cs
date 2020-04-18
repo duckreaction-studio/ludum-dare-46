@@ -43,7 +43,10 @@ public class ActionManager : SingletonSaved<ActionManager>
             remainingTime = Mathf.Max(remainingTime, 0);
             if(remainingTime == 0)
             {
-                GameOver();
+                if (currentAction.doIt)
+                    GameOver();
+                else
+                    currentState = ActionState.DONE;
             }
         }
     }
@@ -82,7 +85,8 @@ public class ActionManager : SingletonSaved<ActionManager>
         {
             target = RandomFishTarget();
         }
-        return new Action(type, target);
+        bool doIt = UnityEngine.Random.Range(0f, 1f) > 0.5f;
+        return new Action(doIt, type, target);
     }
 
     public void DoAction(Action action)

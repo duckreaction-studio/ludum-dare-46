@@ -8,7 +8,7 @@ namespace UI
     {
         public void OnClick()
         {
-            ActionManager.Instance.DoAction(new Action(ActionType.MUTE));
+            ActionManager.Instance.DoAction(new Action(true,ActionType.MUTE));
         }
     }
 }
