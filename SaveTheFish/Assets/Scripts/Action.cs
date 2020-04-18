@@ -12,7 +12,7 @@ public class Action
 
     }
 
-    public Action(ActionType type, string target)
+    public Action(ActionType type, string target = null)
     {
         this.type = type;
         this.target = target;

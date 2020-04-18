@@ -68,7 +68,7 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     private Action CreateRandomAction()
     {
-        ActionType type = (ActionType)UnityEngine.Random.Range(0, 3);
+        ActionType type = (ActionType)UnityEngine.Random.Range(0, 5);
         string target = "";
         if(type == ActionType.PRESS_KEY)
         {
