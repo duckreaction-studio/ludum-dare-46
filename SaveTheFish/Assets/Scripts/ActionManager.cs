@@ -19,20 +19,26 @@ public class ActionManager : SingletonSaved<ActionManager>
     [SerializeField]
     public float holdMinTime { get; protected set; } = 0.3f;
 
+    protected ActionSequence actions = new ActionSequence();
     protected ActionState currentState;
     protected int actionCount;
-
     protected Action currentAction;
 
     public float remainingTime { get; private set; } = 0;
+
+    public void Start()
+    {
+        Restart();
+    }
 
     public void Update()
     {
         if(currentState == ActionState.INIT || currentState == ActionState.DONE)
         {
             currentState = ActionState.IN_PROGRESS;
-            currentAction = CreateRandomAction();
+            currentAction = actions[actionCount];
             remainingTime = CalculateTimerDuration();
+            actionCount++;
             Utils.ClearLogs();
             Debug.Log("Start");
             Debug.Log(currentAction);
@@ -73,22 +79,6 @@ public class ActionManager : SingletonSaved<ActionManager>
         currentState = ActionState.IN_PROGRESS;
     }
 
-    private Action CreateRandomAction()
-    {
-        ActionType type = (ActionType)UnityEngine.Random.Range(0, 5);
-        string target = "";
-        if(type == ActionType.PRESS_KEY)
-        {
-            char ascii = (char)UnityEngine.Random.Range(65, 91);
-            target = ascii.ToString();
-        }else if(type == ActionType.CLICK)
-        {
-            target = RandomFishTarget();
-        }
-        bool doIt = UnityEngine.Random.Range(0f, 1f) > 0.5f;
-        return new Action(doIt, type, target);
-    }
-
     public void DoAction(Action action)
     {
         if(currentState == ActionState.IN_PROGRESS)
@@ -114,22 +104,7 @@ public class ActionManager : SingletonSaved<ActionManager>
     {
         actionCount = 0;
         currentState = ActionState.INIT;
-    }
-
-    public string RandomFishTarget()
-    {
-        int rand = UnityEngine.Random.Range(0, 4);
-        switch(rand)
-        {
-            case 1:
-                return "head";
-            case 2:
-                return "body";
-            case 3:
-                return "tail";
-            default:
-                return null;
-        }
+        actions.Init();
     }
 
 }
