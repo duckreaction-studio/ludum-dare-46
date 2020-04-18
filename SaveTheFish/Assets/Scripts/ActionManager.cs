@@ -2,6 +2,11 @@
 using System;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+using System.Reflection;
+#endif
+
 public enum ActionState { INIT, IN_PROGRESS, DONE, GAME_OVER }
 public class ActionManager : SingletonSaved<ActionManager>
 {
@@ -35,6 +40,7 @@ public class ActionManager : SingletonSaved<ActionManager>
             currentAction = CreateRandomAction();
             startActionTime = Time.realtimeSinceStartup;
             CalculateTimerDuration();
+            Utils.ClearLogs();
             Debug.Log("Start");
             Debug.Log(currentAction);
         }
@@ -60,12 +66,15 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     private Action CreateRandomAction()
     {
-        ActionType type = ActionType.PRESS_KEY; //(ActionType)UnityEngine.Random.Range(0, 3);
+        ActionType type = ActionType.CLICK; //(ActionType)UnityEngine.Random.Range(0, 3);
         string target = "";
         if(type == ActionType.PRESS_KEY)
         {
             char ascii = (char)UnityEngine.Random.Range(65, 91);
             target = ascii.ToString();
+        }else if(type == ActionType.CLICK)
+        {
+            target = RandomFishTarget();
         }
         return new Action(type, target);
     }
@@ -95,6 +104,22 @@ public class ActionManager : SingletonSaved<ActionManager>
     {
         actionCount = 0;
         currentState = ActionState.INIT;
+    }
+
+    public string RandomFishTarget()
+    {
+        int rand = UnityEngine.Random.Range(0, 4);
+        switch(rand)
+        {
+            case 1:
+                return "head";
+            case 2:
+                return "body";
+            case 3:
+                return "tail";
+            default:
+                return null;
+        }
     }
 
 }

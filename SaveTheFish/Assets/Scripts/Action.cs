@@ -36,4 +36,10 @@ public class Action
     {
         return new Action(ActionType.PRESS_KEY, key);
     }
+
+    public static Action Click(string target)
+    {
+        return new Action(ActionType.CLICK, target);
+    }
+
 }
