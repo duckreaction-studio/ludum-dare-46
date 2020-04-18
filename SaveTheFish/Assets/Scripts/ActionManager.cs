@@ -7,7 +7,7 @@ using UnityEditor;
 using System.Reflection;
 #endif
 
-public enum ActionState { INIT, IN_PROGRESS, DONE, GAME_OVER }
+public enum ActionState { INIT, IN_PROGRESS, PAUSE_ACTION, DONE, GAME_OVER }
 public class ActionManager : SingletonSaved<ActionManager>
 {
     [SerializeField]
@@ -21,18 +21,10 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     protected ActionState currentState;
     protected int actionCount;
-    protected float currentTimerDuration;
-    protected float startActionTime;
 
     protected Action currentAction;
 
-    public float remaingTime
-    {
-        get
-        {
-            return Mathf.Max(startActionTime + currentTimerDuration - Time.realtimeSinceStartup, 0);
-        }
-    }
+    public float remainingTime { get; private set; } = 0;
 
     public void Update()
     {
@@ -40,15 +32,16 @@ public class ActionManager : SingletonSaved<ActionManager>
         {
             currentState = ActionState.IN_PROGRESS;
             currentAction = CreateRandomAction();
-            startActionTime = Time.realtimeSinceStartup;
-            CalculateTimerDuration();
+            remainingTime = CalculateTimerDuration();
             Utils.ClearLogs();
             Debug.Log("Start");
             Debug.Log(currentAction);
         }
         else if(currentState == ActionState.IN_PROGRESS)
         {
-            if(Time.realtimeSinceStartup > startActionTime + currentTimerDuration)
+            remainingTime -= Time.deltaTime;
+            remainingTime = Mathf.Max(remainingTime, 0);
+            if(remainingTime == 0)
             {
                 GameOver();
             }
@@ -61,9 +54,20 @@ public class ActionManager : SingletonSaved<ActionManager>
         currentState = ActionState.GAME_OVER;
     }
 
-    private void CalculateTimerDuration()
+    private float CalculateTimerDuration()
     {
-        currentTimerDuration = (actionTimer - minTimer) * Mathf.Pow(decreaseTimer, actionCount) + minTimer;
+        return (actionTimer - minTimer) * Mathf.Pow(decreaseTimer, actionCount) + minTimer;
+    }
+
+    public void StartPauseTimer()
+    {
+        if(currentState == ActionState.IN_PROGRESS)
+            currentState = ActionState.PAUSE_ACTION;
+    }
+
+    public void StopPauseTimer()
+    {
+        currentState = ActionState.IN_PROGRESS;
     }
 
     private Action CreateRandomAction()
