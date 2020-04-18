@@ -1,0 +1,32 @@
+﻿
+public enum ActionType { CLICK, HOLD, PRESS_KEY, MUTE, QUIT }
+public class Action
+{
+    protected ActionType type;
+    protected string target;
+
+    public Action()
+    {
+
+    }
+
+    public Action(ActionType type, string target)
+    {
+        this.type = type;
+        this.target = target;
+    }
+
+    public bool IsValid(Action action)
+    {
+        if (type != action.type)
+            return false;
+        if (!string.IsNullOrEmpty(target) && target != action.target)
+            return false;
+        return true;
+    }
+
+    public override string ToString()
+    {
+        return type.ToString() + " " + target;
+    }
+}

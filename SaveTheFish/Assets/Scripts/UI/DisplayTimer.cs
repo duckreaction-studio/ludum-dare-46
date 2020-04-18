@@ -4,25 +4,28 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DisplayTimer : MonoBehaviour
+namespace UI
 {
-    [SerializeField]
-    private TMP_Text textUi;
-
-    void Start()
+    public class DisplayTimer : MonoBehaviour
     {
-        textUi.text = "";
-    }
+        [SerializeField]
+        private TMP_Text textUi;
 
-    void Update()
-    {
-        textUi.text = FormatTime(ActionManager.Instance.remaingTime);
-    }
+        void Start()
+        {
+            textUi.text = "";
+        }
 
-    private string FormatTime(float remaingTime)
-    {
-        int seconds = ((int)remaingTime) / 1;
-        int milli = (int)((remaingTime - ((float)seconds)) * 1000);
-        return String.Format("{0:0}:{1:000}", seconds, milli);
+        void Update()
+        {
+            textUi.text = FormatTime(ActionManager.Instance.remaingTime);
+        }
+
+        private string FormatTime(float remaingTime)
+        {
+            int seconds = ((int)remaingTime) / 1;
+            int milli = (int)((remaingTime - ((float)seconds)) * 1000);
+            return String.Format("{0:0}:{1:000}", seconds, milli);
+        }
     }
 }
