@@ -42,4 +42,8 @@ public class Action
         return new Action(ActionType.CLICK, target);
     }
 
+    public static Action Hold(string target)
+    {
+        return new Action(ActionType.HOLD, target);
+    }
 }

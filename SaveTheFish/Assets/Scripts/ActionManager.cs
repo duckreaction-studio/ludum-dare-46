@@ -16,6 +16,8 @@ public class ActionManager : SingletonSaved<ActionManager>
     protected float decreaseTimer = 0.9f;
     [SerializeField]
     protected float minTimer = 0.8f;
+    [SerializeField]
+    public float holdMinTime { get; protected set; } = 0.3f;
 
     protected ActionState currentState;
     protected int actionCount;
@@ -66,7 +68,7 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     private Action CreateRandomAction()
     {
-        ActionType type = ActionType.CLICK; //(ActionType)UnityEngine.Random.Range(0, 3);
+        ActionType type = (ActionType)UnityEngine.Random.Range(0, 3);
         string target = "";
         if(type == ActionType.PRESS_KEY)
         {
