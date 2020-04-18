@@ -1,7 +1,8 @@
 ﻿using Helper;
+using System;
 using UnityEngine;
 
-public enum ActionState { UNKNOWN, IN_PROGRESS, DONE, GAME_OVER }
+public enum ActionState { INIT, IN_PROGRESS, DONE, GAME_OVER }
 public class ActionManager : SingletonSaved<ActionManager>
 {
     [SerializeField]
@@ -16,6 +17,8 @@ public class ActionManager : SingletonSaved<ActionManager>
     protected float currentTimerDuration;
     protected float startActionTime;
 
+    protected Action currentAction;
+
     public float remaingTime
     {
         get
@@ -26,12 +29,14 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     public void Update()
     {
-        if(currentState == ActionState.UNKNOWN || currentState == ActionState.DONE)
+        if(currentState == ActionState.INIT || currentState == ActionState.DONE)
         {
             currentState = ActionState.IN_PROGRESS;
+            currentAction = CreateRandomAction();
             startActionTime = Time.realtimeSinceStartup;
             CalculateTimerDuration();
             Debug.Log("Start");
+            Debug.Log(currentAction);
         }
         else if(currentState == ActionState.IN_PROGRESS)
         {
@@ -47,4 +52,28 @@ public class ActionManager : SingletonSaved<ActionManager>
     {
         currentTimerDuration = (actionTimer - minTimer) * Mathf.Pow(decreaseTimer, actionCount) + minTimer;
     }
+
+    private Action CreateRandomAction()
+    {
+        ActionType type = (ActionType)UnityEngine.Random.Range(0, 3);
+        string target = "";
+        if(type == ActionType.PRESS_KEY)
+        {
+            char ascii = (char)UnityEngine.Random.Range(65, 91);
+            target = ascii.ToString();
+        }
+        return new Action(type, target);
+    }
+
+    public bool IsGameOver()
+    {
+        return currentState == ActionState.GAME_OVER;
+    }
+
+    public void Restart()
+    {
+        actionCount = 0;
+        currentState = ActionState.INIT;
+    }
+
 }
