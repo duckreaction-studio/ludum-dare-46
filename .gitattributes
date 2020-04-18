@@ -1,0 +1,61 @@
+* -text
+
+*.css           text
+*.html          text
+*.java          text
+*.js            text
+*.json          text
+*.properties    text
+*.txt           text
+*.xml           text
+*.cs            text
+
+
+
+# 3D models
+*.3dm -text
+*.3ds -text
+*.blend -text
+*.c4d -text
+*.collada -text
+*.dae -text
+*.dxf -text
+*.fbx -text
+*.jas -text
+*.lws -text
+*.lxo -text
+*.ma -text
+*.max -text
+*.mb -text
+*.obj -text
+*.ply -text
+*.skp -text
+*.stl -text
+*.ztl -text
+# Audio
+*.aif -text
+*.aiff -text
+*.it -text
+*.mod -text
+*.mp3 -text
+*.ogg -text
+*.s3m -text
+*.wav -text
+*.xm -text
+# Fonts
+*.otf -text
+*.ttf -text
+# Images
+*.bmp -text
+*.exr -text
+*.gif -text
+*.hdr -text
+*.iff -text
+*.jpeg -text
+*.jpg -text
+*.pict -text
+*.png -text
+*.psd -text
+*.tga -text
+*.tif -text
+*.tiff -text
