@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishSkin: {fileID: 2488173779286502588}
+  maxBlend: 70
+  blendTransition: 0.05
 --- !u!1 &381256840454920533
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +933,7 @@ GameObject:
   - component: {fileID: 3832268440593592160}
   - component: {fileID: 4984814224016533788}
   m_Layer: 0
-  m_Name: BoddyButton
+  m_Name: BodyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -976,7 +978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f68eb2d69989e842a25131caebb4003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: boddy
+  target: body
   followTransform: {fileID: 6408846801755999991}
 --- !u!1001 &816524526483564230
 PrefabInstance:
