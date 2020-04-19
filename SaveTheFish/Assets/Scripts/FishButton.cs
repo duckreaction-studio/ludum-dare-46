@@ -42,6 +42,7 @@ public class FishButton : MonoBehaviour
         press = true;
         startTime = Time.realtimeSinceStartup;
         ActionManager.Instance.StartPauseTimer();
+        SendMessageUpwards("FishStartPress", target);
     }
 
     private void StopPress()
@@ -50,6 +51,7 @@ public class FishButton : MonoBehaviour
         {
             press = false;
             ActionManager.Instance.StopPauseTimer();
+            SendMessageUpwards("FishStopPress", target);
             float time = Time.realtimeSinceStartup - startTime;
             if (time > ActionManager.Instance.holdMinTime)
             {
