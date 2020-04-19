@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sound;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,6 +67,16 @@ public class FishBehaviour : MonoBehaviour
         {
             item.Value.Update(Time.deltaTime);
         }
+    }
+
+    void ActionSuccess()
+    {
+        SoundManager.Play("ActionDone");
+    }
+
+    void ActionFail()
+    {
+        SoundManager.Play("Defeat");
     }
 
     void FishStartPress(string target)

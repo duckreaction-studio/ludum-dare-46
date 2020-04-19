@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sound;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,6 +44,7 @@ public class FishButton : MonoBehaviour
         startTime = Time.realtimeSinceStartup;
         ActionManager.Instance.StartPauseTimer();
         SendMessageUpwards("FishStartPress", target);
+        SoundManager.Play("Grab");
     }
 
     private void StopPress()

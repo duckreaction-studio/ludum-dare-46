@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sound;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,6 +29,7 @@ public class FailSequence : MonoBehaviour
         gameObject.SetActive(true);
         switchProcess.SetProfile(1);
         failText.text = CreateFailText(userAction, wantedAction);
+        SoundManager.Play("DefeatHowl");
     }
 
     private string CreateFailText(Action userAction, Action wantedAction)

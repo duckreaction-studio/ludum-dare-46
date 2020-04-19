@@ -3,68 +3,71 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[Serializable]
-public class SoundList
+namespace Sound
 {
-    [SerializeField]
-    private bool _enabled = true; 
-    public bool enabled
+    [Serializable]
+    public class SoundList
     {
-        get
+        [SerializeField]
+        private bool _enabled = true;
+        public bool enabled
         {
-            return _enabled;
+            get
+            {
+                return _enabled;
+            }
+            set
+            {
+                _enabled = value;
+            }
         }
-        set
+
+        [SerializeField]
+        private AudioSource audioSource;
+
+        [SerializeField]
+        [Range(0f, 3f)]
+        private float volumeFactor = 1f;
+
+        [SerializeField]
+        private AudioClip[] clips;
+
+        public void PlaySound(float volume, float pitch)
         {
-            _enabled = value;
+            if (enabled)
+            {
+                var randomSound = clips[Random.Range(0, clips.Length)];
+                audioSource.volume = volume * volumeFactor;
+                audioSource.pitch = pitch;
+                audioSource.Stop();
+                audioSource.PlayOneShot(randomSound);
+            }
         }
     }
 
-    [SerializeField]
-    private AudioSource audioSource;
-
-    [SerializeField]
-    [Range(0f,3f)]
-    private float volumeFactor = 1f;
-
-    [SerializeField]
-    private AudioClip[] clips;
-
-    public void PlaySound(float volume, float pitch)
+    public class RandomSoundPlayer : MonoBehaviour
     {
-        if (enabled)
+        [SerializeField]
+        [MinMaxSlider(0f, 1f)]
+        public Vector2 volume = new Vector2(1f, 1f);
+
+        [SerializeField]
+        [MinMaxSlider(-3f, 3f)]
+        public Vector2 pitch = new Vector2(1f, 1f);
+
+        [SerializeField]
+        private SoundList[] lists;
+
+        [ContextMenu("PlaySound")]
+        public void PlaySound()
         {
-            var randomSound = clips[Random.Range(0, clips.Length)];
-            audioSource.volume = volume * volumeFactor;
-            audioSource.pitch = pitch;
-            audioSource.Stop();
-            audioSource.PlayOneShot(randomSound);
-        }
-    }
-}
+            float randomVolume = Random.Range(volume.x, volume.y);
+            float randomPitch = Random.Range(pitch.x, pitch.y);
 
-public class RandomSoundPlayer : MonoBehaviour
-{
-    [SerializeField]
-    [MinMaxSlider(0f, 1f)]
-    public Vector2 volume = new Vector2(1f, 1f);
-
-    [SerializeField]
-    [MinMaxSlider(-3f, 3f)]
-    public Vector2 pitch = new Vector2(1f, 1f);
-
-    [SerializeField]
-    private SoundList[] lists;
-
-    [ContextMenu("PlaySound")]
-    public void PlaySound()
-    {
-        float randomVolume = Random.Range(volume.x, volume.y);
-        float randomPitch = Random.Range(pitch.x, pitch.y);
-
-        foreach(var list in lists)
-        {
-            list.PlaySound(randomVolume, randomPitch);
+            foreach (var list in lists)
+            {
+                list.PlaySound(randomVolume, randomPitch);
+            }
         }
     }
 }

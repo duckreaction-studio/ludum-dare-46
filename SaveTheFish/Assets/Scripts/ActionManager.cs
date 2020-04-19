@@ -159,6 +159,8 @@ public class ActionManager : SingletonSaved<ActionManager>
     private IEnumerator GameOver(Action userAction)
     {
         Debug.Log("Game Over");
+        if (fish != null)
+            fish.BroadcastMessage("ActionFail", null, SendMessageOptions.DontRequireReceiver);
         currentState = ActionState.GAME_OVER;
         yield return new WaitForSecondsRealtime(waitBeforeWinSequence);
         failSequence.Show(userAction,playerCurrentAction);

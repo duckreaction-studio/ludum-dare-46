@@ -394,7 +394,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5580513775913957251}
+      - m_Target: {fileID: 2977885968351169706}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -910,7 +910,7 @@ GameObject:
   - component: {fileID: 4807091387122704391}
   - component: {fileID: 4693534264291906760}
   m_Layer: 0
-  m_Name: WinCamera
+  m_Name: LooseCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -958,7 +958,7 @@ Camera:
   field of view: 34.2
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1169,7 +1169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5756530885293195741}
-  - component: {fileID: 5580513775913957251}
+  - component: {fileID: 2977885968351169706}
   m_Layer: 0
   m_Name: LooseSequence
   m_TagString: Untagged
@@ -1194,7 +1194,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5580513775913957251
+--- !u!114 &2977885968351169706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1203,10 +1203,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5397113484630926241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91c1a9f73c1f173428c15d0301325021, type: 3}
+  m_Script: {fileID: 11500000, guid: c1c1dabc43f3005478cfa28c53a1dcc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextRoundText: {fileID: 4709253730993184451}
+  failText: {fileID: 4709253730993184451}
 --- !u!1 &7280814318362395651
 GameObject:
   m_ObjectHideFlags: 0

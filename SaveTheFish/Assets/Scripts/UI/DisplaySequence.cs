@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sound;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -41,6 +42,7 @@ namespace UI
         private IEnumerator Appear()
         {
             container.SetActive(true);
+            SoundManager.Play("NewActions");
             yield return new WaitForSecondsRealtime(showDuration);
             container.SetActive(false);
             ActionManager.Instance.OnInstructionsHidden();

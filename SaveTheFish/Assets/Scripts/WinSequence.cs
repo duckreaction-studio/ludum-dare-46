@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Sound;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class WinSequence : MonoBehaviour
         gameObject.SetActive(true);
         switchProcess.SetProfile(1);
         nextRoundText.text = string.Format("NEXT ROUND : {0:00}", nextRound);
+        SoundManager.Play("Victory");
     }
 
     public void OnClick()
