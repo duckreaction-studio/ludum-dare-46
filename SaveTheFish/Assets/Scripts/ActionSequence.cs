@@ -52,15 +52,15 @@ public class ActionSequence : List<Action>
 
     public string RandomFishTarget()
     {
-        int rand = Random.Range(0, 4);
+        int rand = Random.Range(0, 3);
         switch (rand)
         {
             case 1:
                 return "head";
             case 2:
                 return "body";
-            case 3:
-                return "tail";
+          /*  case 3:
+                return "tail";*/
             default:
                 return null;
         }
