@@ -71,6 +71,7 @@ public class FishBehaviour : MonoBehaviour
     void FishStartPress(string target)
     {
         StartBlend(target);
+        BroadcastMessage("FishImpact", target, SendMessageOptions.DontRequireReceiver);
     }
 
     void FishStopPress(string target)
