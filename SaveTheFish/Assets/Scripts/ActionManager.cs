@@ -27,6 +27,8 @@ public class ActionManager : SingletonSaved<ActionManager>
     [SerializeField]
     private float waitBeforeWinSequence = 1f;
     [SerializeField]
+    private FailSequence failSequence;
+    [SerializeField]
     GameObject fish;
 
     protected ActionSequence actions = new ActionSequence();
@@ -65,7 +67,7 @@ public class ActionManager : SingletonSaved<ActionManager>
             if(remainingTime == 0)
             {
                 if (playerCurrentAction.doIt)
-                    GameOver();
+                    StartCoroutine(GameOver(null));
                 else
                     ActionSuccess();
             }
@@ -126,7 +128,7 @@ public class ActionManager : SingletonSaved<ActionManager>
             }
             else
             {
-                GameOver();
+                StartCoroutine(GameOver(action));
             }
         }
     }
@@ -154,10 +156,12 @@ public class ActionManager : SingletonSaved<ActionManager>
         winSequence.Show(actionCount + 1);
     }
 
-    private void GameOver()
+    private IEnumerator GameOver(Action userAction)
     {
         Debug.Log("Game Over");
         currentState = ActionState.GAME_OVER;
+        yield return new WaitForSecondsRealtime(waitBeforeWinSequence);
+        failSequence.Show(userAction,playerCurrentAction);
     }
 
     public bool IsGameOver()

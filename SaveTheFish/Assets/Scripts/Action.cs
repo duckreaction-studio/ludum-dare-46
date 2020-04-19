@@ -33,7 +33,14 @@ public class Action
 
     public override string ToString()
     {
-        return (doIt ? "Fish says ": "") + TypeToString(type) + " " + target;
+        return (doIt ? "Fish says ": "") + TypeToString(type) + 
+            ( string.IsNullOrEmpty(target) ? "" : " " + target);
+    }
+
+    public string ShortLabel()
+    {
+        return TypeToString(type) +
+            (string.IsNullOrEmpty(target) ? "" : " " + target);
     }
 
     private string TypeToString(ActionType type)
