@@ -815,7 +815,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1.0771754
+  m_Pitch: 0.97804165
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1058,11 +1058,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: {x: 0.9370254, y: 1}
-  pitch: {x: 0.77, y: 1.3553808}
+  pitch: {x: 0.87, y: 1.257231}
   lists:
   - _enabled: 1
     audioSource: {fileID: 614414933}
-    volumeFactor: 2
+    volumeFactor: 2.46
     clips:
     - {fileID: 8300000, guid: 13467af306be7764a901e833a2e8cfe2, type: 3}
     - {fileID: 8300000, guid: ee3602aa985580e4180265dd08e30376, type: 3}
@@ -1219,8 +1219,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 13467af306be7764a901e833a2e8cfe2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5500523
-  m_Pitch: 1.0771754
+  m_Volume: 0.5346478
+  m_Pitch: 0.97804165
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2507,7 +2507,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1.0771754
+  m_Pitch: 0.97804165
   Loop: 0
   Mute: 0
   Spatialize: 0
