@@ -8,7 +8,7 @@ using UnityEditor;
 using System.Reflection;
 #endif
 
-public enum ActionState { INIT, SHOW_INSTRUCTIONS, IN_PROGRESS, PAUSE_ACTION, DONE, GAME_OVER }
+public enum ActionState { INIT, SHOW_INSTRUCTIONS, IN_PROGRESS, PAUSE_ACTION, SEQUENCE_DONE, GAME_OVER }
 public class ActionManager : SingletonSaved<ActionManager>
 {
     [SerializeField]
@@ -25,14 +25,29 @@ public class ActionManager : SingletonSaved<ActionManager>
     protected ActionSequence actions = new ActionSequence();
     protected ActionState currentState;
     protected int actionCount;
-    protected Action currentAction;
+    protected int playerCurrentActionCount;
+    protected Action lastAction
+    {
+        get
+        {
+            return actions[actionCount - 1];
+        }
+    }
+    protected Action playerCurrentAction
+    {
+        get
+        {
+            return actions[playerCurrentActionCount];
+        }
+    }
 
     public float remainingTime { get; private set; } = 0;
 
     public void Start()
     {
         Init();
-        Restart();
+        Reset();
+        StartActionSequence();
     }
 
     private void Init()
@@ -42,24 +57,28 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     public void Update()
     {
-        if(currentState == ActionState.INIT || currentState == ActionState.DONE)
-        {
-            currentAction = actions[actionCount];
-            remainingTime = CalculateTimerDuration();
-            actionCount++;
-            ShowIntructions();
-        }
-        else if(currentState == ActionState.IN_PROGRESS)
+        if(currentState == ActionState.IN_PROGRESS)
         {
             remainingTime -= Time.deltaTime;
             remainingTime = Mathf.Max(remainingTime, 0);
             if(remainingTime == 0)
             {
-                if (currentAction.doIt)
+                if (playerCurrentAction.doIt)
                     GameOver();
                 else
-                    currentState = ActionState.DONE;
+                    ActionSuccess();
             }
+        }
+    }
+
+    private void StartActionSequence()
+    {
+        if (currentState == ActionState.INIT || currentState == ActionState.SEQUENCE_DONE)
+        {
+            remainingTime = CalculateTimerDuration();
+            actionCount++;
+            playerCurrentActionCount = 0;
+            ShowIntructions();
         }
     }
 
@@ -68,19 +87,14 @@ public class ActionManager : SingletonSaved<ActionManager>
         currentState = ActionState.SHOW_INSTRUCTIONS;
         Utils.ClearLogs();
         Debug.Log("Start");
-        Debug.Log(currentAction);
-        displaySequence.Show(currentAction, actions.GetRange(0, actionCount - 1));
+        Debug.Log(lastAction);
+        displaySequence.Show(lastAction, actions.GetRange(0, actionCount - 1));
     }
 
     private void OnInstructionsHidden(object sender, EventArgs e)
     {
         currentState = ActionState.IN_PROGRESS;
-    }
-
-    private void GameOver()
-    {
-        Debug.Log("Game Over");
-        currentState = ActionState.GAME_OVER;
+        playerCurrentActionCount = 0;
     }
 
     private float CalculateTimerDuration()
@@ -103,16 +117,37 @@ public class ActionManager : SingletonSaved<ActionManager>
     {
         if(currentState == ActionState.IN_PROGRESS)
         {
-            if(currentAction.IsValid(action))
+            Debug.Log(action);
+            if(playerCurrentAction.IsValid(action))
             {
-                Debug.Log("Well done");
-                currentState = ActionState.DONE;
+                ActionSuccess();
             }
             else
             {
                 GameOver();
             }
         }
+    }
+
+    private void ActionSuccess()
+    {
+        Debug.Log("Well done");
+        playerCurrentActionCount++;
+        if (playerCurrentActionCount >= actionCount)
+        {
+            currentState = ActionState.SEQUENCE_DONE;
+            StartActionSequence();
+        }
+        else
+        {
+            remainingTime = CalculateTimerDuration();
+        }
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("Game Over");
+        currentState = ActionState.GAME_OVER;
     }
 
     public bool IsGameOver()
@@ -122,9 +157,15 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     public void Restart()
     {
+        Reset();
+        StartActionSequence();
+    }
+
+    private void Reset()
+    {
         actionCount = 0;
+        playerCurrentActionCount = 0;
         currentState = ActionState.INIT;
         actions.Init();
     }
-
 }
