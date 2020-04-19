@@ -33,7 +33,6 @@ public class FishImpulse : MonoBehaviour
     {
         if(rigidbody != null && targetFilters.Contains(target))
         {
-            Debug.Log("Explode");
             rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier, ForceMode.Impulse);
         }
     }
