@@ -28,18 +28,18 @@ public class ActionManager : SingletonSaved<ActionManager>
     protected ActionState currentState;
     protected int actionCount;
     protected int playerCurrentActionCount;
-    protected Action lastAction
+    public Action lastAction
     {
         get
         {
-            return actions[actionCount - 1];
+            return actions.Count > actionCount - 1 && actionCount > 1 ? actions[actionCount - 1] : null;
         }
     }
-    protected Action playerCurrentAction
+    public Action playerCurrentAction
     {
         get
         {
-            return actions[playerCurrentActionCount];
+            return actions.Count > playerCurrentActionCount && playerCurrentActionCount >= 0 ? actions[playerCurrentActionCount] : null;
         }
     }
 
