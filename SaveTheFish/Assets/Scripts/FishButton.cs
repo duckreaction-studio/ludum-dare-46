@@ -6,9 +6,21 @@ public class FishButton : MonoBehaviour
 {
     [SerializeField]
     private string target;
+    [SerializeField]
+    private Transform followTransform;
 
     private float startTime;
     private bool press = false;
+
+    [ContextMenu("Update position and rotation")]
+    public void Update()
+    {
+        if (followTransform != null)
+        { 
+            transform.position = followTransform.position;
+            transform.rotation = followTransform.rotation;
+        }
+    }
 
     private void OnMouseDown()
     {
@@ -30,6 +42,7 @@ public class FishButton : MonoBehaviour
         press = true;
         startTime = Time.realtimeSinceStartup;
         ActionManager.Instance.StartPauseTimer();
+        SendMessageUpwards("FishStartPress", target);
     }
 
     private void StopPress()
@@ -38,6 +51,7 @@ public class FishButton : MonoBehaviour
         {
             press = false;
             ActionManager.Instance.StopPauseTimer();
+            SendMessageUpwards("FishStopPress", target);
             float time = Time.realtimeSinceStartup - startTime;
             if (time > ActionManager.Instance.holdMinTime)
             {

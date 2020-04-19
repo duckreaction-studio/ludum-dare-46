@@ -33,7 +33,12 @@ public class Action
 
     public override string ToString()
     {
-        return (doIt ? "Simons says ": "") + type.ToString() + " " + target;
+        return (doIt ? "Fish says ": "") + TypeToString(type) + " " + target;
+    }
+
+    private string TypeToString(ActionType type)
+    {
+        return type.ToString().Replace("_", " ");
     }
 
     public static Action PressKey(string key)
