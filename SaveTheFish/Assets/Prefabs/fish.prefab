@@ -49,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishSkin: {fileID: 2488173779286502588}
+  eyes:
+  - {fileID: 7621645309362380783}
+  - {fileID: 6139406757678660851}
   maxBlend: 70
   blendTransition: 0.05
 --- !u!1 &381256840454920533
