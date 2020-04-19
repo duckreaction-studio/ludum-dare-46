@@ -20,8 +20,6 @@ namespace UI
         [SerializeField]
         private float showDuration = 3f;
 
-        public event EventHandler hidden;
-
 
         public void Show(Action currentAction, List<Action> lastActions)
         {
@@ -45,8 +43,7 @@ namespace UI
             container.SetActive(true);
             yield return new WaitForSecondsRealtime(showDuration);
             container.SetActive(false);
-            if (hidden != null)
-                hidden.Invoke(this, null);
+            ActionManager.Instance.OnInstructionsHidden();
         }
     }
 }

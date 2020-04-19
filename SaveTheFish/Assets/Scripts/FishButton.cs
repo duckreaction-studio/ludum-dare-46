@@ -34,7 +34,7 @@ public class FishButton : MonoBehaviour
 
     private void OnMouseExit()
     {
-        StopPress();
+        //StopPress();
     }
 
     private void StartPress()

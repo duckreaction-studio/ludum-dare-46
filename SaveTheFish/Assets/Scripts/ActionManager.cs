@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using UI;
+using System.Collections;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -22,6 +23,10 @@ public class ActionManager : SingletonSaved<ActionManager>
     [SerializeField]
     private DisplaySequence displaySequence;
     [SerializeField]
+    private WinSequence winSequence;
+    [SerializeField]
+    private float waitBeforeWinSequence = 1f;
+    [SerializeField]
     GameObject fish;
 
     protected ActionSequence actions = new ActionSequence();
@@ -32,7 +37,7 @@ public class ActionManager : SingletonSaved<ActionManager>
     {
         get
         {
-            return actions.Count > actionCount - 1 && actionCount > 1 ? actions[actionCount - 1] : null;
+            return actions.Count > actionCount - 1 && actionCount >= 1 ? actions[actionCount - 1] : null;
         }
     }
     public Action playerCurrentAction
@@ -47,14 +52,8 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     public void StartGame()
     {
-        Init();
         Reset();
         StartActionSequence();
-    }
-
-    private void Init()
-    {
-        displaySequence.hidden += OnInstructionsHidden;
     }
 
     public void Update()
@@ -73,7 +72,7 @@ public class ActionManager : SingletonSaved<ActionManager>
         }
     }
 
-    private void StartActionSequence()
+    public void StartActionSequence()
     {
         if (currentState == ActionState.INIT || currentState == ActionState.SEQUENCE_DONE)
         {
@@ -93,7 +92,7 @@ public class ActionManager : SingletonSaved<ActionManager>
         displaySequence.Show(lastAction, actions.GetRange(0, actionCount - 1));
     }
 
-    private void OnInstructionsHidden(object sender, EventArgs e)
+    public void OnInstructionsHidden()
     {
         currentState = ActionState.IN_PROGRESS;
         playerCurrentActionCount = 0;
@@ -139,7 +138,7 @@ public class ActionManager : SingletonSaved<ActionManager>
         if (playerCurrentActionCount >= actionCount)
         {
             currentState = ActionState.SEQUENCE_DONE;
-            StartActionSequence();
+            StartCoroutine(ShowWinSequence());
         }
         else
         {
@@ -147,6 +146,12 @@ public class ActionManager : SingletonSaved<ActionManager>
         }
         if (fish != null)
             fish.BroadcastMessage("ActionSuccess", null, SendMessageOptions.DontRequireReceiver);
+    }
+
+    private IEnumerator ShowWinSequence()
+    {
+        yield return new WaitForSecondsRealtime(waitBeforeWinSequence);
+        winSequence.Show(actionCount + 1);
     }
 
     private void GameOver()
