@@ -9,6 +9,7 @@ public class ActionSequence : List<Action>
         Clear();
         FillListWithRandomActions();
         Shuffle();
+        this[0] = new Action(true, ActionType.CLICK); //first action always click on the fish
     }
 
     private void FillListWithRandomActions()
@@ -48,23 +49,6 @@ public class ActionSequence : List<Action>
             this[b] = tmp;
         }
     }
-
-    /*    private Action CreateRandomAction()
-        {
-            ActionType type = (ActionType)UnityEngine.Random.Range(0, 5);
-            string target = "";
-            if (type == ActionType.PRESS_KEY)
-            {
-                char ascii = (char)Random.Range(65, 91);
-                target = ascii.ToString();
-            }
-            else if (type == ActionType.CLICK)
-            {
-                target = RandomFishTarget();
-            }
-            bool doIt = UnityEngine.Random.Range(0f, 1f) > 0.5f;
-            return new Action(doIt, type, target);
-        }*/
 
     public string RandomFishTarget()
     {

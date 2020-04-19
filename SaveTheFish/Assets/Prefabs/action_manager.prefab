@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6929749564745552772}
   - component: {fileID: 6929749564745552775}
+  - component: {fileID: 7398435755308213693}
   m_Layer: 0
-  m_Name: ActionManager
+  m_Name: action_manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,3 +48,17 @@ MonoBehaviour:
   actionTimer: 3
   decreaseTimer: 0.9
   minTimer: 0.8
+  displaySequence: {fileID: 0}
+--- !u!114 &7398435755308213693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6929749564745552774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17555353d0bbf164ab46f265818fe291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0

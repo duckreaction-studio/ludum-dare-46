@@ -98,7 +98,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 65.15
+  m_fontSize: 36.8
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 165.5
+  m_fontSize: 126.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -364,6 +364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7235944317116286071}
+  - component: {fileID: 6568672373970236967}
   m_Layer: 5
   m_Name: SequencePanel
   m_TagString: Untagged
@@ -391,6 +392,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6568672373970236967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7235944317116286070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d1a233400f85674e9359ab0cb716a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiMainAction: {fileID: 7235944315871819922}
+  uiSequence: {fileID: 2427815272848394338}
+  showDuration: 2
 --- !u!1 &7235944317723325220
 GameObject:
   m_ObjectHideFlags: 0

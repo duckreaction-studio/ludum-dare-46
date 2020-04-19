@@ -1,13 +1,14 @@
 ﻿using Helper;
 using System;
 using UnityEngine;
+using UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
 using System.Reflection;
 #endif
 
-public enum ActionState { INIT, IN_PROGRESS, PAUSE_ACTION, DONE, GAME_OVER }
+public enum ActionState { INIT, SHOW_INSTRUCTIONS, IN_PROGRESS, PAUSE_ACTION, DONE, GAME_OVER }
 public class ActionManager : SingletonSaved<ActionManager>
 {
     [SerializeField]
@@ -18,6 +19,8 @@ public class ActionManager : SingletonSaved<ActionManager>
     protected float minTimer = 0.8f;
     [SerializeField]
     public float holdMinTime { get; protected set; } = 0.3f;
+    [SerializeField]
+    private DisplaySequence displaySequence;
 
     protected ActionSequence actions = new ActionSequence();
     protected ActionState currentState;
@@ -28,20 +31,23 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     public void Start()
     {
+        Init();
         Restart();
+    }
+
+    private void Init()
+    {
+        displaySequence.hidden += OnInstructionsHidden;
     }
 
     public void Update()
     {
         if(currentState == ActionState.INIT || currentState == ActionState.DONE)
         {
-            currentState = ActionState.IN_PROGRESS;
             currentAction = actions[actionCount];
             remainingTime = CalculateTimerDuration();
             actionCount++;
-            Utils.ClearLogs();
-            Debug.Log("Start");
-            Debug.Log(currentAction);
+            ShowIntructions();
         }
         else if(currentState == ActionState.IN_PROGRESS)
         {
@@ -55,6 +61,20 @@ public class ActionManager : SingletonSaved<ActionManager>
                     currentState = ActionState.DONE;
             }
         }
+    }
+
+    private void ShowIntructions()
+    {
+        currentState = ActionState.SHOW_INSTRUCTIONS;
+        Utils.ClearLogs();
+        Debug.Log("Start");
+        Debug.Log(currentAction);
+        displaySequence.Show(currentAction, actions.GetRange(0, actionCount - 1));
+    }
+
+    private void OnInstructionsHidden(object sender, EventArgs e)
+    {
+        currentState = ActionState.IN_PROGRESS;
     }
 
     private void GameOver()
