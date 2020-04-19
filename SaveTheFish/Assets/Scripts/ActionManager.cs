@@ -32,9 +32,9 @@ public class ActionManager : SingletonSaved<ActionManager>
     GameObject fish;
 
     protected ActionSequence actions = new ActionSequence();
-    protected ActionState currentState;
-    protected int actionCount;
-    protected int playerCurrentActionCount;
+    public ActionState currentState { get; protected set; }
+    public int actionCount { get; protected set; }
+    public int playerCurrentActionCount { get; protected set; }
     public Action lastAction
     {
         get
@@ -50,7 +50,16 @@ public class ActionManager : SingletonSaved<ActionManager>
         }
     }
 
+    public float initialTime { get; private set; } = 0;
     public float remainingTime { get; private set; } = 0;
+
+    public float remainingRatio
+    {
+        get
+        {
+            return remainingTime / initialTime;
+        }
+    }
 
     public void StartGame()
     {
@@ -78,7 +87,7 @@ public class ActionManager : SingletonSaved<ActionManager>
     {
         if (currentState == ActionState.INIT || currentState == ActionState.SEQUENCE_DONE)
         {
-            remainingTime = CalculateTimerDuration();
+            ResetTimer();
             actionCount++;
             playerCurrentActionCount = 0;
             ShowIntructions();
@@ -144,7 +153,7 @@ public class ActionManager : SingletonSaved<ActionManager>
         }
         else
         {
-            remainingTime = CalculateTimerDuration();
+            ResetTimer();
         }
         if (fish != null)
             fish.BroadcastMessage("ActionSuccess", null, SendMessageOptions.DontRequireReceiver);
@@ -183,5 +192,11 @@ public class ActionManager : SingletonSaved<ActionManager>
         playerCurrentActionCount = 0;
         currentState = ActionState.INIT;
         actions.Init();
+    }
+
+    private void ResetTimer()
+    {
+        remainingTime = CalculateTimerDuration();
+        initialTime = remainingTime;
     }
 }

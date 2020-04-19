@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3379485573085021354}
   - component: {fileID: 7969352380424351192}
   - component: {fileID: 2423180496770871896}
-  - component: {fileID: 7530123554790283807}
+  - component: {fileID: 6681443811276778577}
   m_Layer: 5
   m_Name: Count
   m_TagString: Untagged
@@ -157,7 +157,7 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7530123554790283807
+--- !u!114 &6681443811276778577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,10 +166,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 557134196654019388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279f0db4930d69b45a38e6436bc46747, type: 3}
+  m_Script: {fileID: 11500000, guid: 34b610762e8940441ada159fdea462a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textUi: {fileID: 2423180496770871896}
+  uiText: {fileID: 2423180496770871896}
 --- !u!1 &1901964158596740613
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,7 +635,6 @@ GameObject:
   - component: {fileID: 8391825235550566088}
   - component: {fileID: 9198137716465478419}
   - component: {fileID: 3145549785130508119}
-  - component: {fileID: 5991352568001946286}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -781,19 +780,6 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5991352568001946286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2363024618453567802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 279f0db4930d69b45a38e6436bc46747, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textUi: {fileID: 3145549785130508119}
 --- !u!1 &2830694949510551500
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +887,7 @@ GameObject:
   - component: {fileID: 3278234934307964708}
   - component: {fileID: 3278234934307964709}
   - component: {fileID: 6550403953820791673}
+  - component: {fileID: 8566589383759838682}
   m_Layer: 5
   m_Name: GameUI
   m_TagString: Untagged
@@ -1006,6 +993,22 @@ MonoBehaviour:
   uiMainAction: {fileID: 3278234934658036063}
   uiSequence: {fileID: 7540373132272402863}
   showDuration: 3
+--- !u!114 &8566589383759838682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3278234934307964714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253ab85c5db88a946941d8d4d29e253a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 2
+  targets:
+  - {fileID: 557134196654019388}
+  - {fileID: 7117553155723276405}
 --- !u!1 &4243802857912072351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,6 +1730,7 @@ GameObject:
   - component: {fileID: 8845197195116277086}
   - component: {fileID: 8699153384493274515}
   - component: {fileID: 4106440459921415819}
+  - component: {fileID: 7356079305725955829}
   m_Layer: 5
   m_Name: TimerImage
   m_TagString: Untagged
@@ -1790,6 +1794,20 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7356079305725955829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117553155723276405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279f0db4930d69b45a38e6436bc46747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textUi: {fileID: 3145549785130508119}
+  image: {fileID: 4106440459921415819}
 --- !u!1 &8291047465359758512
 GameObject:
   m_ObjectHideFlags: 0
