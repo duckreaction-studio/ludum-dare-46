@@ -6,9 +6,21 @@ public class FishButton : MonoBehaviour
 {
     [SerializeField]
     private string target;
+    [SerializeField]
+    private Transform followTransform;
 
     private float startTime;
     private bool press = false;
+
+    [ContextMenu("Update position and rotation")]
+    public void Update()
+    {
+        if (followTransform != null)
+        { 
+            transform.position = followTransform.position;
+            transform.rotation = followTransform.rotation;
+        }
+    }
 
     private void OnMouseDown()
     {

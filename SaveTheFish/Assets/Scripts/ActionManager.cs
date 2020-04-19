@@ -43,7 +43,7 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     public float remainingTime { get; private set; } = 0;
 
-    public void Start()
+    public void StartGame()
     {
         Init();
         Reset();
@@ -110,7 +110,8 @@ public class ActionManager : SingletonSaved<ActionManager>
 
     public void StopPauseTimer()
     {
-        currentState = ActionState.IN_PROGRESS;
+        if(currentState == ActionState.PAUSE_ACTION)
+            currentState = ActionState.IN_PROGRESS;
     }
 
     public void DoAction(Action action)
