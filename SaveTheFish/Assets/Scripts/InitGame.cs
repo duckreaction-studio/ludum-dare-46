@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sound;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,12 +28,14 @@ public class InitGame : MonoBehaviour
             go.SetActive(true);
         }
         StartCoroutine(IntroCoroutine());
+        SoundManager.Play("Splash");
     }
 
     private IEnumerator IntroCoroutine()
     {
         yield return new WaitForSecondsRealtime(waitBeforeShowStartupScreen);
         startupScreen.SetActive(true);
+        SoundManager.Play("StartClick");
     }
 
 }
