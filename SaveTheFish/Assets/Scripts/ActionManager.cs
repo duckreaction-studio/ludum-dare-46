@@ -21,6 +21,8 @@ public class ActionManager : SingletonSaved<ActionManager>
     public float holdMinTime { get; protected set; } = 0.3f;
     [SerializeField]
     private DisplaySequence displaySequence;
+    [SerializeField]
+    GameObject fish;
 
     protected ActionSequence actions = new ActionSequence();
     protected ActionState currentState;
@@ -143,6 +145,8 @@ public class ActionManager : SingletonSaved<ActionManager>
         {
             remainingTime = CalculateTimerDuration();
         }
+        if (fish != null)
+            fish.BroadcastMessage("ActionSuccess", null, SendMessageOptions.DontRequireReceiver);
     }
 
     private void GameOver()

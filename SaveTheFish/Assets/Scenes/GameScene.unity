@@ -1990,6 +1990,11 @@ PrefabInstance:
       propertyPath: displaySequence
       value: 
       objectReference: {fileID: 3278234933205097374}
+    - target: {fileID: 6929749564745552775, guid: a689628797a1b574782c46d2499d97cf,
+        type: 3}
+      propertyPath: fish
+      value: 
+      objectReference: {fileID: 3198279964624867768}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a689628797a1b574782c46d2499d97cf, type: 3}
 --- !u!1 &1358887889 stripped
@@ -2086,8 +2091,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423579329}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 581, y: -300.86, z: -1308.6818}
+  m_LocalRotation: {x: -0.13299091, y: 0.040726006, z: 0.0054722847, w: 0.9902651}
+  m_LocalPosition: {x: 0.037501454, y: -1.1730891, z: -1.9023561}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3150,21 +3155,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000014901161
-      objectReference: {fileID: 0}
-    - target: {fileID: 2710613155546799774, guid: 59a0fe1899cf7c44789aeabfcf47b88a,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0.000000035390258
-      objectReference: {fileID: 0}
-    - target: {fileID: 2710613155546799774, guid: 59a0fe1899cf7c44789aeabfcf47b88a,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0.10410877
-      objectReference: {fileID: 0}
-    - target: {fileID: 2710613155546799774, guid: 59a0fe1899cf7c44789aeabfcf47b88a,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: -0.00000004749745
       objectReference: {fileID: 0}
     - target: {fileID: 3844876234535135669, guid: 59a0fe1899cf7c44789aeabfcf47b88a,
         type: 3}
