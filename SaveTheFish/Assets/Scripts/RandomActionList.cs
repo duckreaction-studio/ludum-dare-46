@@ -1,30 +1,30 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ActionSequence : List<Action>
+public class RandomActionList : List<Action>
 {
-    public static readonly int MAX_ACTIONS = 100;
+    public static readonly int MAX_ACTIONS = 40;
     public void Init()
     {
         Clear();
         FillListWithRandomActions();
         Shuffle();
         this[0] = new Action(true, ActionType.CLICK); //first action always click on the fish
+        RandomNotDoItAction();
     }
 
     private void FillListWithRandomActions()
     {
-        bool doIt = Random.Range(0f, 1f) > 0.1f;
         ActionType type;
         string target = null;
         for (int i = 0; i < MAX_ACTIONS; i++)
         {
-            if (i < 60)
+            if (i < MAX_ACTIONS * 0.6)
             {
                 type = Random.Range(0f, 1f) > 0.5f ? ActionType.HOLD : ActionType.CLICK;
                 target = RandomFishTarget();
             }
-            else if (i < 90)
+            else if (i < MAX_ACTIONS * 0.9)
             {
                 type = ActionType.PRESS_KEY;
                 target = ((char)Random.Range(65, 91)).ToString();
@@ -34,8 +34,19 @@ public class ActionSequence : List<Action>
                 type = Random.Range(0f, 1f) > 0.5f ? ActionType.MUTE : ActionType.QUIT;
                 target = null;
             }
-            Add(new Action(doIt, type, target));
+
+            Add(new Action(true, type, target));
         }
+    }
+
+    private void RandomNotDoItAction()
+    {
+        int doItIndex = Random.Range(5, 11);
+        do
+        {
+            this[doItIndex].doIt = false;
+            doItIndex += Random.Range(3, 8);
+        } while (doItIndex < this.Count);
     }
 
     private void Shuffle()

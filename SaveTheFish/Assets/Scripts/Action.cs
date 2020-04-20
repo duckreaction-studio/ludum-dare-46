@@ -4,7 +4,7 @@ using System;
 public enum ActionType { CLICK, HOLD, PRESS_KEY, MUTE, QUIT }
 public class Action
 {
-    public bool doIt { get; private set; }
+    public bool doIt { get; set; }
     public ActionType type { get; private set; }
     public string target { get; private set; }
 

@@ -40,7 +40,7 @@ public class FailSequence : MonoBehaviour
             "But Fish says '" + wantedAction.ShortLabel() + "'" : "But Fish says nothing";
         return ""+userActionMsg+ "\n" +
              fishMsg + "\n" +
-            "Fish died and it's entire your fault... Hope you'll sleep well...";
+            "Fish died and it's all your fault... Hope you sleep well...";
     }
 
     public void OnClick()

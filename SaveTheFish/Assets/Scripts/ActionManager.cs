@@ -31,7 +31,7 @@ public class ActionManager : SingletonSaved<ActionManager>
     [SerializeField]
     GameObject fish;
 
-    protected ActionSequence actions = new ActionSequence();
+    protected RandomActionList actions = new RandomActionList();
     public ActionState currentState { get; protected set; }
     public int actionCount { get; protected set; }
     public int playerCurrentActionCount { get; protected set; }
