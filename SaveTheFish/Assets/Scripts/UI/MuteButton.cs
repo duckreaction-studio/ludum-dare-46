@@ -14,18 +14,6 @@ namespace UI
         [SerializeField]
         private Image image;
 
-        private AudioListener _audioListener;
-        public AudioListener audioListener
-        {
-            get
-            {
-                if(_audioListener == null && Camera.main != null)
-                {
-                    _audioListener = Camera.main.GetComponent<AudioListener>();
-                }
-                return _audioListener;
-            }
-        }
         public void OnClick()
         {
             ActionManager actionManager = ActionManager.Instance;
@@ -35,10 +23,10 @@ namespace UI
             {
                 actionManager.DoAction(new Action(true, ActionType.MUTE));
             }
-            else if(audioListener != null)
+            else
             {
-                audioListener.enabled = !audioListener.enabled;
-                image.sprite = audioListener.enabled ? onAudio : offAudio;
+                AudioListener.volume = AudioListener.volume > 0 ? 0 : 1;
+                image.sprite = AudioListener.volume > 0 ? onAudio : offAudio;
             }
         }
     }
