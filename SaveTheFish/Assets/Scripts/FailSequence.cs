@@ -1,4 +1,5 @@
-﻿using Sound;
+﻿using PostProcess;
+using Sound;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ public class FailSequence : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text failText;
+    [SerializeField]
+    private float shakeDuration = 1.2f;
 
     private SwitchProcessProfile _switchProcess;
     public SwitchProcessProfile switchProcess
@@ -24,12 +27,27 @@ public class FailSequence : MonoBehaviour
         }
     }
 
+    private CameraShake _cameraShake;
+    public CameraShake cameraShake
+    {
+        get
+        {
+            if (_cameraShake == null)
+            {
+                _cameraShake = GetComponentInChildren<CameraShake>(true);
+            }
+            return _cameraShake;
+        }
+    }
+
     public void Show(Action userAction, Action wantedAction)
     {
         gameObject.SetActive(true);
         switchProcess.SetProfile(1);
         failText.text = CreateFailText(userAction, wantedAction);
         SoundManager.Play("DefeatHowl");
+        if (cameraShake != null)
+            cameraShake.StartShake(shakeDuration);
     }
 
     private string CreateFailText(Action userAction, Action wantedAction)
