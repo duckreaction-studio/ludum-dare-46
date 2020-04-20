@@ -123,22 +123,22 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_LowTwistLimit:
-    limit: 5.004524
+    limit: 17.833569
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 174.63727
+    limit: 151.34076
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 51.275818
+    limit: 69.26346
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 8.479767
+    limit: 48.631927
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -322,7 +322,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 2
-  m_Constraints: 10
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!114 &1662533974066572229
 MonoBehaviour:
@@ -353,8 +353,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.11311509, z: 0.16607803}
-  m_Center: {x: -1.6684684e-23, y: 0.078924425, z: -0.013170891}
+  m_Size: {x: 0.1, y: 0.07671215, z: 0.14681095}
+  m_Center: {x: -1.2062003e-23, y: 0.060722847, z: -0.0035371978}
 --- !u!1 &4862941020000643793
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,11 +495,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 59.959133
+    limit: 78.862785
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 7.540798
+    limit: 75.94625
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -522,8 +522,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.14626509, y: 0.15622734, z: 0.15593196}
-  m_Center: {x: 0, y: 0.12, z: 0}
+  m_Size: {x: 0.14626509, y: 0.14033271, z: 0.15593196}
+  m_Center: {x: 1.3482837e-23, y: 0.12794733, z: 5.454459e-11}
 --- !u!114 &8888914425875408188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,7 +938,7 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 7.7304688
+    limit: 67.269104
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
