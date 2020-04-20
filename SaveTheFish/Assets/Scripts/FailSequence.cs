@@ -13,6 +13,8 @@ public class FailSequence : MonoBehaviour
     private TMP_Text failText;
     [SerializeField]
     private float shakeDuration = 1.2f;
+    [SerializeField]
+    private int repeatBlink = 10;
 
     private SwitchProcessProfile _switchProcess;
     public SwitchProcessProfile switchProcess
@@ -40,14 +42,29 @@ public class FailSequence : MonoBehaviour
         }
     }
 
+    private BlinkColorGradient _blinkColor;
+    public BlinkColorGradient blinkColor
+    {
+        get
+        {
+            if (_blinkColor == null)
+            {
+                _blinkColor = Camera.main.GetComponent<BlinkColorGradient>();
+            }
+            return _blinkColor;
+        }
+    }
+
     public void Show(Action userAction, Action wantedAction)
     {
         gameObject.SetActive(true);
-        switchProcess.SetProfile(1);
+        switchProcess.SetProfile(2);
         failText.text = CreateFailText(userAction, wantedAction);
         SoundManager.Play("DefeatHowl");
         if (cameraShake != null)
             cameraShake.StartShake(shakeDuration);
+        if (blinkColor != null)
+            blinkColor.StartBlink(shakeDuration, repeatBlink);
     }
 
     private string CreateFailText(Action userAction, Action wantedAction)
@@ -67,4 +84,14 @@ public class FailSequence : MonoBehaviour
         switchProcess.SetProfile(0);
         ActionManager.Instance.Restart();
     }
+
+
+#if UNITY_EDITOR
+    [ContextMenu("Test blink")]
+    public void TestBlink()
+    {
+        switchProcess.SetProfile(2);
+        blinkColor.StartBlink(shakeDuration, repeatBlink);
+    }
+#endif
 }

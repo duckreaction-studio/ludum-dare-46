@@ -1285,6 +1285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   failText: {fileID: 4709253730993184451}
   shakeDuration: 1.5
+  repeatBlink: 20
 --- !u!1 &7280814318362395651
 GameObject:
   m_ObjectHideFlags: 0
