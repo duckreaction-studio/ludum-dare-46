@@ -20,6 +20,8 @@ namespace UI
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBGL
+                Application.OpenURL("https://ldjam.com/events/ludum-dare/46/save-the-fish");
 #else
                 Application.Quit();
 #endif
