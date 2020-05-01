@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.dubitlimited.duck.tween": "https://github.com/dubit/duck-tween.git",
     "com.guciodevs.simple-min-max-slider": "https://github.com/GucioDevs/SimpleMinMaxSlider.git#upm",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "1.2.16",
@@ -46,6 +47,10 @@
     "com.guciodevs.simple-min-max-slider": {
       "revision": "upm",
       "hash": "46ff35d22982657d55f7861ddc01b115a2db1554"
+    },
+    "com.dubitlimited.duck.tween": {
+      "revision": "HEAD",
+      "hash": "ae895e455613b2d810db27d3cf4600c75b6383ad"
     }
   }
 }

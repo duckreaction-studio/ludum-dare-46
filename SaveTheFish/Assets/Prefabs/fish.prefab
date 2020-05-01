@@ -552,6 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122196245013567586}
   - component: {fileID: 7621645309362380783}
+  - component: {fileID: 6299543415504092444}
   m_Layer: 0
   m_Name: eye_fish01
   m_TagString: Untagged
@@ -632,6 +633,18 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.05250247, y: 0.09202532, z: 0.02219388}
     m_Extent: {x: 0.016043633, y: 0.01744216, z: 0.01683745}
   m_DirtyAABB: 0
+--- !u!114 &6299543415504092444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407883070592451040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a479dfb8c92f34eb22175143b9a107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5692820878330518875
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,6 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8703643470414878374}
   - component: {fileID: 6139406757678660851}
+  - component: {fileID: 2253332465578726745}
   m_Layer: 0
   m_Name: eye_fish02
   m_TagString: Untagged
@@ -842,6 +856,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.052504204, y: 0.091969475, z: 0.022211768}
     m_Extent: {x: 0.016134731, y: 0.017497666, z: 0.016846221}
   m_DirtyAABB: 0
+--- !u!114 &2253332465578726745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6477771451085852477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a479dfb8c92f34eb22175143b9a107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7815039275555640140
 GameObject:
   m_ObjectHideFlags: 0
