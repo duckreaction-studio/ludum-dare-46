@@ -470,6 +470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1155209875501234712}
   - component: {fileID: 4463666698853912653}
+  - component: {fileID: 4783698944519815762}
   m_Layer: 0
   m_Name: eye_fish02
   m_TagString: Untagged
@@ -550,6 +551,21 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.07052838, y: 0.0885106, z: 0.031059977}
     m_Extent: {x: 0.043788016, y: 0.035826735, z: 0.03428183}
   m_DirtyAABB: 0
+--- !u!114 &4783698944519815762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3540961863713923971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a479dfb8c92f34eb22175143b9a107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 60
+  dilateDuration: 0.1
+  maxDilate: 100
 --- !u!1 &5048686846439002151
 GameObject:
   m_ObjectHideFlags: 0
