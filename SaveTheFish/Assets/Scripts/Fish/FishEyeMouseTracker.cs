@@ -14,6 +14,8 @@ namespace Fish
         private float dilateDuration = 0.2f;
         [SerializeField]
         private float maxDilate = 100f;
+        [SerializeField]
+        private Transform eyeBone;
 
         private bool dilate = false;
         private BlendShapeAnimation currentAnimation;
@@ -39,11 +41,22 @@ namespace Fish
 
         void Update()
         {
+            UpdateEyeDilate();
+
+            Vector3 mouse = Input.mousePosition;
+            mouse.z = Camera.main.nearClipPlane;
+            Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouse);
+            Vector3 up = mouseWorld - skin.bounds.center;
+            eyeBone.up = up;
+        }
+
+        private void UpdateEyeDilate()
+        {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(skin.bounds.center);
             float sqrDistance = (screenPos - Input.mousePosition).sqrMagnitude;
-            if(sqrDistance < sqrMaxDistance)
+            if (sqrDistance < sqrMaxDistance)
             {
-                if(dilate == false)
+                if (dilate == false)
                 {
                     dilate = true;
                     CreateAnimation(maxDilate);
@@ -51,7 +64,7 @@ namespace Fish
             }
             else
             {
-                if(dilate == true)
+                if (dilate == true)
                 {
                     dilate = false;
                     CreateAnimation(0);
