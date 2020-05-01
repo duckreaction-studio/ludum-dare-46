@@ -1,52 +1,12 @@
-﻿using Sound;
+﻿using DUCK.Tween;
+using DUCK.Tween.Easings;
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Fish
 {
-    public class BlendShapeTween
-    {
-        private SkinnedMeshRenderer skin;
-        private int blendIndex;
-        private float startValue;
-        private float endValue;
-        private float duration;
-        private float delta;
-        public bool play { get; private set; }
-
-        public BlendShapeTween(SkinnedMeshRenderer skin, int blendIndex, float startValue, float endValue, float duration)
-        {
-            this.skin = skin;
-            this.blendIndex = blendIndex;
-            this.startValue = startValue;
-            this.endValue = endValue;
-            this.duration = duration;
-        }
-
-        public void Update(float _delta)
-        {
-            if (play)
-            {
-                delta += _delta;
-                if (delta > duration)
-                {
-                    play = false;
-                    skin.SetBlendShapeWeight(blendIndex, endValue);
-                }
-                else
-                {
-                    skin.SetBlendShapeWeight(blendIndex, Mathf.SmoothStep(startValue, endValue, delta / duration));
-                }
-            }
-        }
-
-        public void Play()
-        {
-            this.play = true;
-            this.delta = 0;
-        }
-    }
 
     public class FishBehaviour : MonoBehaviour
     {
@@ -60,15 +20,12 @@ namespace Fish
         [SerializeField]
         private float blendTransition = 0.15f;
 
-        private Dictionary<string, BlendShapeTween> tweens = new Dictionary<string, BlendShapeTween>();
+        private Dictionary<string, BlendShapeAnimation> tweens = new Dictionary<string, BlendShapeAnimation>();
 
-        void Update()
+        private void Start()
         {
-            fishSkin.SetBlendShapeWeight(3, Mathf.SmoothStep(maxBlend, 0, Mathf.PingPong(Time.time, 0.85f)));
-            foreach (var item in tweens)
-            {
-                item.Value.Update(Time.deltaTime);
-            }
+            var mouthAnimation = new BlendShapeAnimation(fishSkin, 3, 0, maxBlend, 1.7f, Ease.PingPong.Linear);
+            mouthAnimation.Play(-1);
         }
 
         void ActionSuccess()
@@ -96,14 +53,14 @@ namespace Fish
         {
             int index = TargetToBendShapeIndex(target);
             float endValue = revert ? 0f : maxBlend;
-            BlendShapeTween tween = new BlendShapeTween(fishSkin, index, fishSkin.GetBlendShapeWeight(index), endValue, blendTransition);
+            BlendShapeAnimation tween = new BlendShapeAnimation(fishSkin, index, fishSkin.GetBlendShapeWeight(index), endValue, blendTransition);
             tweens["fish-" + index] = tween;
             tween.Play();
 
             index = TargetToBendShapeIndex("press");
             for (var i = 0; i < eyes.Length; i++)
             {
-                tween = new BlendShapeTween(eyes[i], index, fishSkin.GetBlendShapeWeight(index), endValue, blendTransition);
+                tween = new BlendShapeAnimation(eyes[i], index, fishSkin.GetBlendShapeWeight(index), endValue, blendTransition);
                 tweens["eye-" + i + "-" + index] = tween;
                 tween.Play();
             }
