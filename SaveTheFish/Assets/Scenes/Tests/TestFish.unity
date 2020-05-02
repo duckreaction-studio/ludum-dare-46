@@ -508,11 +508,6 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000007450581
       objectReference: {fileID: 0}
-    - target: {fileID: 4783698944519815762, guid: f3b06608472e41b40b6d1266017d80c5,
-        type: 3}
-      propertyPath: eyeBone
-      value: 
-      objectReference: {fileID: 2129499277}
     - target: {fileID: 6744723517942711563, guid: f3b06608472e41b40b6d1266017d80c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -575,9 +570,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3b06608472e41b40b6d1266017d80c5, type: 3}
---- !u!4 &2129499277 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4273441265617350844, guid: f3b06608472e41b40b6d1266017d80c5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1999569261}
-  m_PrefabAsset: {fileID: 0}

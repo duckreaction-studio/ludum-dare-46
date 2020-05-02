@@ -20,10 +20,13 @@ namespace Fish
         [SerializeField]
         private float blendTransition = 0.15f;
 
+        private float minEyeBlend;
+
         private Dictionary<string, BlendShapeAnimation> tweens = new Dictionary<string, BlendShapeAnimation>();
 
         private void Start()
         {
+            minEyeBlend = eyes[0].GetBlendShapeWeight(TargetToBendShapeIndex("press"));
             var mouthAnimation = new BlendShapeAnimation(fishSkin, 3, 0, maxBlend, 1.7f, Ease.PingPong.Linear);
             mouthAnimation.Play(-1);
         }
@@ -58,6 +61,8 @@ namespace Fish
             tween.Play();
 
             index = TargetToBendShapeIndex("press");
+            if (revert)
+                endValue = minEyeBlend;
             for (var i = 0; i < eyes.Length; i++)
             {
                 tween = new BlendShapeAnimation(eyes[i], index, fishSkin.GetBlendShapeWeight(index), endValue, blendTransition);

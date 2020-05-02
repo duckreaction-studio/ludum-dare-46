@@ -149,6 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8480879394436396252}
   - component: {fileID: 73230612209414993}
+  - component: {fileID: 5974373632058443599}
   m_Layer: 0
   m_Name: eye_fish01
   m_TagString: Untagged
@@ -223,12 +224,30 @@ SkinnedMeshRenderer:
   - {fileID: 1235653204758887073}
   - {fileID: 7526749320290397733}
   - {fileID: 4273441265617350844}
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
+  - 10
   m_RootBone: {fileID: 5944700951315499870}
   m_AABB:
     m_Center: {x: -0.068996266, y: 0.08927194, z: 0.030620687}
     m_Extent: {x: 0.043851405, y: 0.040349565, z: 0.037762}
   m_DirtyAABB: 0
+--- !u!114 &5974373632058443599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579724611092426078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a479dfb8c92f34eb22175143b9a107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 60
+  dilateDuration: 0.1
+  maxDilate: 100
+  eyeBone: {fileID: 7526749320290397733}
 --- !u!1 &2864670553320288741
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +564,9 @@ SkinnedMeshRenderer:
   - {fileID: 1235653204758887073}
   - {fileID: 7526749320290397733}
   - {fileID: 4273441265617350844}
-  m_BlendShapeWeights: []
+  m_BlendShapeWeights:
+  - 0
+  - 10
   m_RootBone: {fileID: 5944700951315499870}
   m_AABB:
     m_Center: {x: 0.07052838, y: 0.0885106, z: 0.031059977}
@@ -566,6 +587,7 @@ MonoBehaviour:
   maxDistance: 60
   dilateDuration: 0.1
   maxDilate: 100
+  eyeBone: {fileID: 4273441265617350844}
 --- !u!1 &5048686846439002151
 GameObject:
   m_ObjectHideFlags: 0
