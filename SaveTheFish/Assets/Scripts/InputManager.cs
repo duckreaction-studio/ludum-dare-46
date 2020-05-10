@@ -9,7 +9,7 @@ public class InputManager : SingletonSaved<InputManager>
         {
             string key = Event.current.keyCode.ToString();
             Debug.Log("Press " + key);
-            ActionManager.Instance.DoAction(Action.PressKey(key));
+            ActionManager.Instance.DoAction(UserAction.PressKey(key));
         }
     }
 }

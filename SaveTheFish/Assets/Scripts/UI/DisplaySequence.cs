@@ -22,13 +22,13 @@ namespace UI
         private float showDuration = 3f;
 
 
-        public void Show(Action currentAction, List<Action> lastActions)
+        public void Show(UserAction currentAction, List<UserAction> lastActions)
         {
             UpdateContent(currentAction, lastActions);
             StartCoroutine(Appear());
         }
 
-        private void UpdateContent(Action currentAction, List<Action> lastActions)
+        private void UpdateContent(UserAction currentAction, List<UserAction> lastActions)
         {
             uiMainAction.text = currentAction.ToString();
             string msg = "";

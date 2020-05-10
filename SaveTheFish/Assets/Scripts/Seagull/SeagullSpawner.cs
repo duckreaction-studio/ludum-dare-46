@@ -21,7 +21,7 @@ namespace Seagull
 
         public void DrawGizmo()
         {
-            Bezier bezier = Bezier.CubicBezier(p1.origin, p1.end, p2.back, p2.origin);
+            Bezier bezier = Bezier.CubicBezier(p1.origin, p1.forward, p2.backward, p2.origin);
             float delta = 1 / RESOLUTION;
             for(var i = 0; i < RESOLUTION; i++)
             {
@@ -35,6 +35,25 @@ namespace Seagull
     {
         [SerializeField]
         private bool dawGizmoWhenNotSelected;
+        [SerializeField]
+        private GameObject seagullPrefab;
+
+        private SeagullBehaviour currentSeagull;
+
+        public void Start()
+        {
+            var seagull = Instantiate(seagullPrefab);
+            seagull.SetActive(true);
+            currentSeagull = seagull.GetComponent<SeagullBehaviour>();
+            currentSeagull.startPoint = RandomSpawnPoint("start");
+            currentSeagull.landPoint = RandomSpawnPoint("landing");
+            currentSeagull.endPoint = RandomSpawnPoint("end");
+        }
+
+        public void StartFly()
+        {
+            currentSeagull.StartFly();
+        }
 
         public void OnDrawGizmos()
         {
@@ -72,12 +91,20 @@ namespace Seagull
             return paths;
         }
 
-        private IEnumerable<Spawner> FindSpawnPoints(string tag)
+        private Spawner RandomSpawnPoint(string tag)
+        {
+            var points = FindSpawnPoints(tag);
+            int rnd = UnityEngine.Random.Range(0, points.Count());
+            return points[rnd];
+        }
+
+        private Spawner[] FindSpawnPoints(string tag)
         {
             var objects = GameObject.FindGameObjectsWithTag("Respawn");
             return objects
                 .Select(x => x.GetComponent<Spawner>())
-                .Where(x => x != null && x.spawnTag == tag);
+                .Where(x => x != null && x.spawnTag == tag)
+                .ToArray();
         }
     }
 

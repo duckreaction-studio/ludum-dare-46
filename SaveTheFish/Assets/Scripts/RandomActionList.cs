@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomActionList : List<Action>
+public class RandomActionList : List<UserAction>
 {
     public static readonly int MAX_ACTIONS = 40;
     public void Init()
@@ -9,7 +9,7 @@ public class RandomActionList : List<Action>
         Clear();
         FillListWithRandomActions();
         Shuffle();
-        this[0] = new Action(true, ActionType.CLICK); //first action always click on the fish
+        this[0] = new UserAction(true, ActionType.CLICK); //first action always click on the fish
         RandomNotDoItAction();
     }
 
@@ -35,7 +35,7 @@ public class RandomActionList : List<Action>
                 target = null;
             }
 
-            Add(new Action(true, type, target));
+            Add(new UserAction(true, type, target));
         }
     }
 

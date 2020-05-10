@@ -31,12 +31,12 @@ public class Spawner : MonoBehaviour
         get => transform.position;
     }
 
-    public Vector3 back
+    public Vector3 backward
     {
         get => origin - transform.forward * force;
     }
 
-    public Vector3 end
+    public Vector3 forward
     {
         get => origin + transform.forward * force;
     }

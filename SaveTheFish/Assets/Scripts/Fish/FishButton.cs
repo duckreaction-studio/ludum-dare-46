@@ -59,11 +59,11 @@ namespace Fish
                 float time = Time.realtimeSinceStartup - startTime;
                 if (time > ActionManager.Instance.holdMinTime)
                 {
-                    ActionManager.Instance.DoAction(Action.Hold(target));
+                    ActionManager.Instance.DoAction(UserAction.Hold(target));
                 }
                 else
                 {
-                    ActionManager.Instance.DoAction(Action.Click(target));
+                    ActionManager.Instance.DoAction(UserAction.Click(target));
                 }
             }
         }

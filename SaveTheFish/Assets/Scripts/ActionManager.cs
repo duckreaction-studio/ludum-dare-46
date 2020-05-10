@@ -35,14 +35,14 @@ public class ActionManager : SingletonSaved<ActionManager>
     public ActionState currentState { get; protected set; }
     public int actionCount { get; protected set; }
     public int playerCurrentActionCount { get; protected set; }
-    public Action lastAction
+    public UserAction lastAction
     {
         get
         {
             return actions.Count > actionCount - 1 && actionCount >= 1 ? actions[actionCount - 1] : null;
         }
     }
-    public Action playerCurrentAction
+    public UserAction playerCurrentAction
     {
         get
         {
@@ -126,7 +126,7 @@ public class ActionManager : SingletonSaved<ActionManager>
             currentState = ActionState.IN_PROGRESS;
     }
 
-    public void DoAction(Action action)
+    public void DoAction(UserAction action)
     {
         if(currentState == ActionState.IN_PROGRESS)
         {
@@ -165,7 +165,7 @@ public class ActionManager : SingletonSaved<ActionManager>
         winSequence.Show(actionCount + 1);
     }
 
-    private IEnumerator GameOver(Action userAction)
+    private IEnumerator GameOver(UserAction userAction)
     {
         Debug.Log("Game Over");
         if (fish != null)

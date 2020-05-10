@@ -55,7 +55,7 @@ public class FailSequence : MonoBehaviour
         }
     }
 
-    public void Show(Action userAction, Action wantedAction)
+    public void Show(UserAction userAction, UserAction wantedAction)
     {
         gameObject.SetActive(true);
         switchProcess.SetProfile(2);
@@ -67,7 +67,7 @@ public class FailSequence : MonoBehaviour
             blinkColor.StartBlink(shakeDuration, repeatBlink);
     }
 
-    private string CreateFailText(Action userAction, Action wantedAction)
+    private string CreateFailText(UserAction userAction, UserAction wantedAction)
     {
         string userActionMsg = userAction == null ? 
             "You have done nothing" : "You have done '" + userAction.ShortLabel() +"'";

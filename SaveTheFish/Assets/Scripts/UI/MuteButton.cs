@@ -21,7 +21,7 @@ namespace UI
                 && actionManager.playerCurrentAction.type == ActionType.MUTE
                 && actionManager.playerCurrentAction.doIt)
             {
-                actionManager.DoAction(new Action(true, ActionType.MUTE));
+                actionManager.DoAction(new UserAction(true, ActionType.MUTE));
             }
             else
             {

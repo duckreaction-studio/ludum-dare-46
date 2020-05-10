@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bezier
 {
+    public static readonly float DELTA = 0.01f;
+
     private Vector3[] points;
 
     public Vector3 p0 { get => points[0]; }
@@ -36,5 +39,12 @@ public class Bezier
             3 * Mathf.Pow(1 - t, 2) * t * p1 +
             3 * (1 - t) * Mathf.Pow(t,2)  * p2 +
             Mathf.Pow(t, 3) * p3;
+    }
+
+    internal Vector3 CalculateForward(float t)
+    {
+        var p0 = Calculate(t);
+        var p1 = Calculate(t + DELTA);
+        return p1 - p0;
     }
 }

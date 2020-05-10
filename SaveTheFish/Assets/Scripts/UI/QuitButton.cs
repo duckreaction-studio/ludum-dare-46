@@ -14,7 +14,7 @@ namespace UI
                 && actionManager.playerCurrentAction.type == ActionType.QUIT
                 && actionManager.playerCurrentAction.doIt)
             {
-                ActionManager.Instance.DoAction(new Action(true, ActionType.QUIT));
+                ActionManager.Instance.DoAction(new UserAction(true, ActionType.QUIT));
             }
             else 
             {
