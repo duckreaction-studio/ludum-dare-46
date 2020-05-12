@@ -1,5 +1,30 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1101 &-5900694851908924112
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: fly
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 9115511852248344707}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-5866919624848980175
 AnimatorState:
   serializedVersion: 5
@@ -92,19 +117,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: land
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isOnGround
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Main
@@ -193,13 +218,14 @@ AnimatorStateMachine:
     m_State: {fileID: -5866919624848980175}
     m_Position: {x: 180, y: 430, z: 0}
   m_ChildStateMachines: []
-  m_AnyStateTransitions: []
+  m_AnyStateTransitions:
+  - {fileID: -5900694851908924112}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -110, y: 30, z: 0}
+  m_AnyStatePosition: {x: -110, y: 230, z: 0}
   m_EntryPosition: {x: -110, y: 120, z: 0}
-  m_ExitPosition: {x: -120, y: 250, z: 0}
+  m_ExitPosition: {x: -120, y: 420, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -5191878110090935054}
 --- !u!114 &6719690551647724639
@@ -412,10 +438,50 @@ MonoBehaviour:
         CorrectiveParameters: []
         CorrectiveParameterCount: 0
       CorrectedConditionValue: 0
-    ParameterFoldout: 1
+    ParameterFoldout: 0
     ConditionsFoldout: 1
     AfFoldout: 0
     InternalActionID: -368370432EntityAnimatorExtensionSetAnimatorBool
+    CorrectionValues:
+      HasBrokenTypeReference: 0
+      HasBrokenMethodReference: 0
+      HasAlternativeMethods: 1
+      CorrectiveActionName: Nothing selected
+      CorrectiveParameters: []
+      CorrectiveParameterCount: 0
+    StatementType: 0
+  - TypeReference:
+      m_Name: SeagullBehaviour
+      m_AssemblyQualifiedName: Seagull.SeagullBehaviour, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    NameSpace: Seagull
+    ControllerName: SeagullBehaviour
+    StatePhase: 0
+    ActionName: StartLanding
+    Parameters: []
+    ParameterCount: 0
+    RootEvent:
+      TypeReference:
+        m_Name: 
+        m_AssemblyQualifiedName: 
+      NameSpace: 
+      ControllerName: 
+      EventName: 
+      IsAdvancedEvent: 0
+      ArgumentCount: 0
+      FoldoutArguments: 0
+      CorrectionValues:
+        HasBrokenTypeReference: 0
+        HasBrokenMethodReference: 0
+        HasAlternativeMethods: 0
+        CorrectiveActionName: 
+        CorrectiveParameters: []
+        CorrectiveParameterCount: 0
+    Conditions: []
+    ParameterFoldout: 0
+    ConditionsFoldout: 0
+    AfFoldout: 0
+    InternalActionID: 510420224SeagullBehaviourStartLanding
     CorrectionValues:
       HasBrokenTypeReference: 0
       HasBrokenMethodReference: 0
@@ -543,6 +609,45 @@ MonoBehaviour:
       CorrectiveParameters: []
       CorrectiveParameterCount: 0
     StatementType: 1
+  - TypeReference:
+      m_Name: 
+      m_AssemblyQualifiedName: 
+    NameSpace: No Controller selected
+    ControllerName: No Controller selected
+    StatePhase: 0
+    ActionName: Nothing selected
+    Parameters: []
+    ParameterCount: 0
+    RootEvent:
+      TypeReference:
+        m_Name: 
+        m_AssemblyQualifiedName: 
+      NameSpace: 
+      ControllerName: 
+      EventName: 
+      IsAdvancedEvent: 0
+      ArgumentCount: 0
+      FoldoutArguments: 0
+      CorrectionValues:
+        HasBrokenTypeReference: 0
+        HasBrokenMethodReference: 0
+        HasAlternativeMethods: 0
+        CorrectiveActionName: 
+        CorrectiveParameters: []
+        CorrectiveParameterCount: 0
+    Conditions: []
+    ParameterFoldout: 0
+    ConditionsFoldout: 0
+    AfFoldout: 0
+    InternalActionID: 510420224SeagullBehaviourStartLanding
+    CorrectionValues:
+      HasBrokenTypeReference: 0
+      HasBrokenMethodReference: 0
+      HasAlternativeMethods: 0
+      CorrectiveActionName: Nothing selected
+      CorrectiveParameters: []
+      CorrectiveParameterCount: 0
+    StatementType: 1
   ThrowExceptionOnError: 1
   DisableTransitionDelays: 1
   StateInfo:
@@ -591,6 +696,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionControllers:
+  - TypeReference:
+      m_Name: SeagullBehaviour
+      m_AssemblyQualifiedName: Seagull.SeagullBehaviour, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    NameSpace: Seagull
+    ControllerName: SeagullBehaviour
+    StatePhase: 2
+    ActionName: FlyToLandingPoint
+    Parameters: []
+    ParameterCount: 0
+    RootEvent:
+      TypeReference:
+        m_Name: 
+        m_AssemblyQualifiedName: 
+      NameSpace: 
+      ControllerName: 
+      EventName: 
+      IsAdvancedEvent: 0
+      ArgumentCount: 0
+      FoldoutArguments: 0
+      CorrectionValues:
+        HasBrokenTypeReference: 0
+        HasBrokenMethodReference: 0
+        HasAlternativeMethods: 0
+        CorrectiveActionName: 
+        CorrectiveParameters: []
+        CorrectiveParameterCount: 0
+    Conditions: []
+    ParameterFoldout: 0
+    ConditionsFoldout: 0
+    AfFoldout: 0
+    InternalActionID: 337969408SeagullBehaviourFlyToLandingPoint
+    CorrectionValues:
+      HasBrokenTypeReference: 0
+      HasBrokenMethodReference: 0
+      HasAlternativeMethods: 1
+      CorrectiveActionName: Nothing selected
+      CorrectiveParameters: []
+      CorrectiveParameterCount: 0
+    StatementType: 0
   - TypeReference:
       m_Name: EntityAnimatorExtension
       m_AssemblyQualifiedName: ManasparkAssets.LogicStateMachine.EntityAnimatorExtension,
@@ -742,46 +887,6 @@ MonoBehaviour:
     ConditionsFoldout: 1
     AfFoldout: 0
     InternalActionID: 231251328EntityAnimatorExtensionSetAnimatorTrigger
-    CorrectionValues:
-      HasBrokenTypeReference: 0
-      HasBrokenMethodReference: 0
-      HasAlternativeMethods: 1
-      CorrectiveActionName: Nothing selected
-      CorrectiveParameters: []
-      CorrectiveParameterCount: 0
-    StatementType: 0
-  - TypeReference:
-      m_Name: SeagullBehaviour
-      m_AssemblyQualifiedName: Seagull.SeagullBehaviour, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    NameSpace: Seagull
-    ControllerName: SeagullBehaviour
-    StatePhase: 2
-    ActionName: FlyToLandingPoint
-    Parameters: []
-    ParameterCount: 0
-    RootEvent:
-      TypeReference:
-        m_Name: 
-        m_AssemblyQualifiedName: 
-      NameSpace: 
-      ControllerName: 
-      EventName: 
-      IsAdvancedEvent: 0
-      ArgumentCount: 0
-      FoldoutArguments: 0
-      CorrectionValues:
-        HasBrokenTypeReference: 0
-        HasBrokenMethodReference: 0
-        HasAlternativeMethods: 0
-        CorrectiveActionName: 
-        CorrectiveParameters: []
-        CorrectiveParameterCount: 0
-    Conditions: []
-    ParameterFoldout: 0
-    ConditionsFoldout: 0
-    AfFoldout: 0
-    InternalActionID: 337969408SeagullBehaviourFlyToLandingPoint
     CorrectionValues:
       HasBrokenTypeReference: 0
       HasBrokenMethodReference: 0

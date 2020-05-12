@@ -362,3 +362,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flyDuration: 2
+  landingDuration: 0.5
+  landingPointDistance: 0.5

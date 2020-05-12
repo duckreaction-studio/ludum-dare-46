@@ -23,7 +23,11 @@ namespace Seagull
         }
 
         [SerializeField]
-        private float flyDuration;
+        private float flyDuration = 2f;
+        [SerializeField]
+        private float landingDuration = 0.3f;
+        [SerializeField]
+        private float landingPointDistance = 0.5f;
 
         public Spawner startPoint { get; set; }
         public Spawner landPoint { get; set; }
@@ -31,15 +35,19 @@ namespace Seagull
 
         private float currentTime;
         private Bezier currentTrajectory;
+        private float landingStartOffset;
 
         private void Start()
         {
             transform.position = startPoint.origin;
-            transform.forward = startPoint.forward;
+            transform.forward = startPoint.forwardDirection;
         }
 
         public void StartFly()
         {
+            Debug.Log("Start fly");
+            transform.position = startPoint.origin;
+            transform.forward = startPoint.forwardDirection;
             entityAnimatorExtension.SetAnimatorTrigger("fly",0);
             currentTime = 0;
             currentTrajectory = Bezier.CubicBezier(
@@ -51,18 +59,34 @@ namespace Seagull
         {
             currentTime += Time.deltaTime;
             float t = currentTime / flyDuration;
-            transform.position = currentTrajectory.Calculate(t);
-            transform.forward = currentTrajectory.CalculateForward(t);
+            if (t <= 1f)
+            {
+                transform.position = currentTrajectory.Calculate(t);
+                transform.forward = currentTrajectory.CalculateForward(t);
+            }
         }
         
         public bool IsCloseToLandingPoint()
         {
-            return false;
+            return (landPoint.origin - transform.position).sqrMagnitude < landingPointDistance * landingPointDistance;
+        }
+
+        public void StartLanding()
+        {
+            Debug.Log("Start landing");
+            landingStartOffset = currentTime / flyDuration;
+            currentTime = 0;
         }
 
         public void Landing()
         {
-
+            currentTime += Time.deltaTime;
+            float t = (1 - landingStartOffset) * (currentTime / landingDuration) + landingStartOffset;
+            if (t <= 1f)
+            {
+                transform.position = currentTrajectory.Calculate(t);
+                transform.forward = currentTrajectory.CalculateForward(t);
+            }
         }
 
         public bool IsOnGround()

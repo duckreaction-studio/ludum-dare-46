@@ -43,7 +43,7 @@ public class Bezier
 
     internal Vector3 CalculateForward(float t)
     {
-        var p0 = Calculate(t);
+        var p0 = Calculate(t - DELTA);
         var p1 = Calculate(t + DELTA);
         return p1 - p0;
     }

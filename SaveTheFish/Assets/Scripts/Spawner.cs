@@ -38,7 +38,12 @@ public class Spawner : MonoBehaviour
 
     public Vector3 forward
     {
-        get => origin + transform.forward * force;
+        get => origin + forwardDirection;
+    }
+
+    public Vector3 forwardDirection
+    {
+        get => transform.forward * force;
     }
 
 #if UNITY_EDITOR
