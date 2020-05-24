@@ -14,9 +14,12 @@ public class Bezier
     public Vector3 p2 { get => points[2]; }
     public Vector3 p3 { get => points[3]; }
 
+    private Vector3[] derivativeVectors;
+
     public Bezier(Vector3[] points)
     {
         this.points = points;
+        CalculateDerivativeVectors();
     }
 
     public static Bezier CubicBezier(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
@@ -41,10 +44,24 @@ public class Bezier
             Mathf.Pow(t, 3) * p3;
     }
 
-    internal Vector3 CalculateForward(float t)
+    public Vector3 CalculateForward(float t)
     {
         var p0 = Calculate(t - DELTA);
         var p1 = Calculate(t + DELTA);
         return p1 - p0;
+    }
+
+    public float CalculateTByLength(float t, float length)
+    {
+        return t + length / (t * t * derivativeVectors[0] + t * derivativeVectors[1] + derivativeVectors[2]).magnitude;
+    }
+
+    private void CalculateDerivativeVectors()
+    {
+        // help : https://gamedev.stackexchange.com/questions/27056/how-to-achieve-uniform-speed-of-movement-on-a-bezier-curve
+        derivativeVectors = new Vector3[points.Length - 1];
+        derivativeVectors[0] = -3 * p0 + 9 * p1 - 9 * p2 + 3 * p3;
+        derivativeVectors[1] = 6 * p0 - 12 * p1 + 6 * p2;
+        derivativeVectors[2] = -3 * p0 + 3 * p1;
     }
 }

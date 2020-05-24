@@ -23,9 +23,11 @@ namespace Seagull
         }
 
         [SerializeField]
-        private float flyDuration = 2f;
+        private Animator actorAnimator;
         [SerializeField]
-        private float landingDuration = 0.3f;
+        private float flySpeed = 1.5f;
+        [SerializeField]
+        private float landingSpeed = 1f;
         [SerializeField]
         private float landingPointDistance = 0.5f;
 
@@ -33,14 +35,16 @@ namespace Seagull
         public Spawner landPoint { get; set; }
         public Spawner endPoint { get; set; }
 
-        private float currentTime;
+        private float progress;
         private Bezier currentTrajectory;
-        private float landingStartOffset;
+        private float speed;
 
         private void Start()
         {
             transform.position = startPoint.origin;
             transform.forward = startPoint.forwardDirection;
+
+            actorAnimator.SetTrigger("fly");
         }
 
         public void StartFly()
@@ -49,20 +53,24 @@ namespace Seagull
             transform.position = startPoint.origin;
             transform.forward = startPoint.forwardDirection;
             entityAnimatorExtension.SetAnimatorTrigger("fly",0);
-            currentTime = 0;
+            actorAnimator.ResetTrigger("prepareLanding");
+            entityAnimatorExtension.SetAnimatorBool("isOnGround", false, 0);
+            progress = 0;
+            speed = flySpeed;
             currentTrajectory = Bezier.CubicBezier(
                 startPoint.origin, startPoint.forward, 
                 landPoint.backward, landPoint.origin);
+
+            actorAnimator.SetTrigger("fly");
         }
 
         public void FlyToLandingPoint()
         {
-            currentTime += Time.deltaTime;
-            float t = currentTime / flyDuration;
-            if (t <= 1f)
+            progress = currentTrajectory.CalculateTByLength(progress,flySpeed * Time.deltaTime);
+            if (progress <= 1f)
             {
-                transform.position = currentTrajectory.Calculate(t);
-                transform.forward = currentTrajectory.CalculateForward(t);
+                transform.position = currentTrajectory.Calculate(progress);
+                transform.forward = currentTrajectory.CalculateForward(progress);
             }
         }
         
@@ -74,24 +82,20 @@ namespace Seagull
         public void StartLanding()
         {
             Debug.Log("Start landing");
-            landingStartOffset = currentTime / flyDuration;
-            currentTime = 0;
+            speed = landingSpeed;
+            actorAnimator.SetTrigger("prepareLanding");
         }
 
         public void Landing()
         {
-            currentTime += Time.deltaTime;
-            float t = (1 - landingStartOffset) * (currentTime / landingDuration) + landingStartOffset;
-            if (t <= 1f)
-            {
-                transform.position = currentTrajectory.Calculate(t);
-                transform.forward = currentTrajectory.CalculateForward(t);
-            }
+            FlyToLandingPoint();
+            entityAnimatorExtension.SetAnimatorBool("isOnGround", progress >= 1f, 0);
         }
 
-        public bool IsOnGround()
+        public void OnLand()
         {
-            return false;
+            actorAnimator.SetTrigger("land");
+            actorAnimator.ResetTrigger("fly");
         }
     }
 
