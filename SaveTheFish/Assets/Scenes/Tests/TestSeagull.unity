@@ -131,37 +131,37 @@ PrefabInstance:
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.48071736
+      value: 0.811
       objectReference: {fileID: 0}
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.97
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.26623988
+      value: -0.892
       objectReference: {fileID: 0}
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.93829405
       objectReference: {fileID: 0}
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.34583852
       objectReference: {fileID: 0}
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
@@ -176,7 +176,7 @@ PrefabInstance:
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 220.46599
       objectReference: {fileID: 0}
     - target: {fileID: 7956255773714113204, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
@@ -191,7 +191,7 @@ PrefabInstance:
     - target: {fileID: 8928066374556895746, guid: f1f36e402d61c134392de4b070032ee9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1f36e402d61c134392de4b070032ee9, type: 3}
