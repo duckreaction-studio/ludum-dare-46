@@ -83,6 +83,7 @@ MonoBehaviour:
   flySpeed: 1.5
   landingSpeed: 1.5
   landingPointDistance: 1.6
+  walkSpeed: 0.28
 --- !u!1001 &7517867293839143036
 PrefabInstance:
   m_ObjectHideFlags: 0
